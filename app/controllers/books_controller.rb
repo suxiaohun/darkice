@@ -4,6 +4,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+    # This project supply some useful tools and examples about ruby、go、c e.g.
     ids = Book.pluck(:id)
     @books = Book.find(ids.sample(10))
   end

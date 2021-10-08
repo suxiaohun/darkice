@@ -6,29 +6,6 @@ class YysController < ApplicationController
     @max_count = config[:max_pick_count] || 1000
   end
 
-  def maintenance
-    "
-   Notes:
-
-1. Sakura Coins can be used in the Tales Shop for Memory Shard, an item which can be used in the event. Piece together the Memory Shard on your scrapbooks to create a story and obtain rewards.
-
-2. After collecting all Memory Shards, players can redeem other items from the event shop, including Youko's new skin can not be obtained by any other means before 2021, so do not miss out!
-
-2. Spring Talisman Pass (April)
-
-Event time: After the update on April 8th - May 13th EST.
-
-Onmyoji can complete different missions to increase their Talisman level.
-
-As the Talisman level increases, Onmyoji can obtain various rewards.
-
-Purchase the Deluxe Talisman to unlock bonus rewards such as Shiranui's skin  Dancer
-
-Note: The Talisman Pass 20% Off Voucher obtained from the Talisman Pass the last month will be automatically used when purchasing the Deluxe Talisman. This reduces the price for the Classic Chest and Premium Chests to 40 S-jade and 92 S-jade respectively.
-"
-  end
-
-
   def manage
     @summon = YysSummon.first
     @summon_modes = YysSummonMode.all

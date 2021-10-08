@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 
 
-  resources :users
-  post 'identity/image_verification'
-  post 'identity/image_verification_nsq'
-
   get 'img_to_base64',to: 'tools#img_to_base64'
   post 'img_to_base64',to: 'tools#img_to_base64'
 

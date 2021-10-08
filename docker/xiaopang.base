@@ -1,4 +1,4 @@
-FROM ruby:2.6.5
+FROM ccr.ccs.tencentyun.com/crystal/ruby.base:2.6.5
 
 ADD docker/rsa/id_rsa /etc/ssh/docker.rsa
 

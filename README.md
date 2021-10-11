@@ -11,8 +11,13 @@ purchase commercial products to support them if you can.
 
 * Test rails features
 
+* Test Docker
+
+* Test k8s
+
 * Useful tools
     - color selector
+    - websocket example  
     - free novels to read
     - json content valid
     - search phone number address info

@@ -8,15 +8,15 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5.3', '>= 0.4.4'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.5'
 
-gem 'recursive-open-struct'
-gem 'chinese_pinyin'
+gem 'recursive-open-struct', '~> 1.1', '>= 1.1.3'
+gem 'chinese_pinyin', '~> 1.1'
 
-gem 'redis'
-gem 'redis-namespace'
+gem 'redis', '~> 4.4'
+gem 'redis-namespace', '~> 1.8', '>= 1.8.1'
 
-gem "sidekiq", ">= 6.2.1"
+gem 'sidekiq', '~> 6.2', '>= 6.2.2'
 
 
 #gem 'execjs'
@@ -41,8 +41,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'bootsnap', '~> 1.9', '>= 1.9.1', require: false
 
 #gem 'capistrano', '~> 3.6'
 #gem 'capistrano-bundler', '~> 1.6'
@@ -52,23 +52,23 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 #gem 'unicorn_metrics', '~> 0.2.1'
 
-gem 'unicorn'
+gem 'unicorn', '~> 6.0'
 
-gem 'ed25519', '>= 1.2', '< 2.0'
-gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+gem 'ed25519', '~> 1.2', '>= 1.2.4'
+gem 'bcrypt_pbkdf', '~> 1.1'
 
-gem 'elasticsearch'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'elasticsearch', '~> 7.15'
+gem 'elasticsearch-model', '~> 7.2'
+gem 'elasticsearch-rails', '~> 7.2'
 
-gem 'kaminari'
+gem 'kaminari', '~> 1.2', '>= 1.2.1'
 
 #gem 'prometheus_exporter'
 
 #gem 'raindrops'
 
 
-gem 'pry'
+gem 'pry', '~> 0.14.1'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -81,8 +81,8 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+  gem 'capybara', '~> 3.35', '>= 3.35.3'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', '~> 4.6', '>= 4.6.1'
 end

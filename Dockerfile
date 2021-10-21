@@ -1,11 +1,11 @@
-FROM xiaopang.base:v1.0
+FROM xiaopang.base:v1.2
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 #RUN bundle config --global frozen 1
 
 WORKDIR /var/www/xiaopang
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile ./
 
 RUN bundle install
 

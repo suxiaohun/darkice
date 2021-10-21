@@ -38,5 +38,6 @@ app/assets/videos
 lib/utils/books/*
 !lib/utils/books/.keep
 
+Gemfile.lock
 
 

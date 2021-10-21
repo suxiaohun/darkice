@@ -8,6 +8,6 @@ echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
 apt update && apt install -y nodejs
 
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile ./
 
 RUN bundle install

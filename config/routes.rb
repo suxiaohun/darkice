@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'test_timeout', to: 'common#test_timeout'
   get 'test', to: 'common#test'
   get 'markdown', to: 'tools#markdown'
+  get 'hammerspoon', to: 'tools#hammerspoon'
 
   get 'skills', to: 'common#skills'
   get 'items', to: 'common#items'

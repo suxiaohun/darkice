@@ -2,6 +2,11 @@ class ToolsController < ApplicationController
   def markdown
 
   end
+
+  def hammerspoon
+
+  end
+
   def mirror
     data = {
       "schemaVersion": 2,

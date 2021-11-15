@@ -9,9 +9,6 @@ function haha() {
     }
 }
 
-console.log("......2......haha");
-console.log("......3......haha");
-
 var foo = 'bar';
 
 // setTimeout(() => foo = 'baz', 500);

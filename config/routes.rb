@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'test', to: 'common#test'
   get 'markdown', to: 'tools#markdown'
   get 'hammerspoon', to: 'tools#hammerspoon'
+  get 'wow', to: 'tools#wow'
+  get 'screen', to: 'tools#screen'
 
   get 'skills', to: 'common#skills'
   get 'items', to: 'common#items'

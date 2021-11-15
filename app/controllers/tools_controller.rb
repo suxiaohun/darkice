@@ -1,11 +1,18 @@
 class ToolsController < ApplicationController
-  def markdown
+  def markdown; end
 
-  end
+  def hammerspoon; end
 
-  def hammerspoon
+  def wow; end
 
-  end
+  def base64_to_img; end
+
+  def json; end
+
+  def json_format; end
+  def screen; end
+
+  def colors; end
 
   def mirror
     data = {
@@ -71,14 +78,6 @@ class ToolsController < ApplicationController
 
   end
 
-  def base64_to_img
-
-  end
-
-  def json
-
-  end
-
   def sign
     if request.post?
       keys = params[:keys]
@@ -94,7 +93,7 @@ class ToolsController < ApplicationController
         @sign = Digest::MD5.hexdigest(@sign_str)
       when 'sha1'
         @sign = Digest::SHA1.hexdigest(@sign_str)
-      when 'sha2','sha256'
+      when 'sha2', 'sha256'
         @sign = Digest::SHA2.hexdigest(@sign_str)
       else
         @sign = 'unsupported hex type'
@@ -147,14 +146,6 @@ class ToolsController < ApplicationController
 
   end
 
-  def json_format
-
-  end
-
-  def colors
-
-  end
-
   def mobile_area
   end
 
@@ -186,12 +177,11 @@ class ToolsController < ApplicationController
     @comment.save
   end
 
-
   def rpc
     # socket = Socket.new(Socket::AF_INET,Socket::SOCK_STREAM)
-    server = Socket.new(:AF_INET,:SOCK_STREAM)
+    server = Socket.new(:AF_INET, :SOCK_STREAM)
 
-    addr = Socket.pack_sockaddr_in(4481,'0.0.0.0')
+    addr = Socket.pack_sockaddr_in(4481, '0.0.0.0')
     server.bind addr
     server.listen(5)
 

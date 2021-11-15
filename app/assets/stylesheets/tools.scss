@@ -3,9 +3,17 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
-
 html,
 body {
   width: 1024px;
   margin: 0 auto;
+}
+
+.common-table td {
+  border: 1px solid grey;
+  padding: 15px 15px;
+}
+
+.common-table {
+  border-collapse: collapse;
 }

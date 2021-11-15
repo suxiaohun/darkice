@@ -2,7 +2,7 @@ user_agent=navigator.userAgent.toLowerCase()
 $(document).ready(function () {
     $("#resolution").html(screen.width + "x" + screen.height + "x" + screen.colorDepth);
     $("#bodysize").html($("#welcome").width() + "x" + $("#welcome").height());
-    var slide = new Array();
+    var slide = [];
     var current_slide = 0;
     var d = 1;
     $("#main li").each(function (j) {

@@ -1,4 +1,5 @@
 #!/bin/bash
+# 如果静态文件有过更新，先执行 ./image_build_static，再执行此脚本
 cp config/database.yml.k8s config/database.yml
 cp config/property/property.k8s.yml config/property.yml
 cp .dockerignore.base .dockerignore

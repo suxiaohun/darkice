@@ -11,7 +11,7 @@ body {
   margin: 0;
   background-color: #f5fcff;
   background-position: 0 25px;
-  background-image: url("screen/bg.gif");
+  background-image: image_url("screen/bg.gif");
   background-repeat: repeat-x
 }
 
@@ -1391,17 +1391,17 @@ a { text-decoration: none;}
 
 #preloader {
   background:
-          url("screen/horizontal-line-1px.gif"),
-          url("screen/horizontal-line-2px.gif"),
-          url("screen/vertical-line-1px.gif"),
-          url("screen/vertical-line-2px.gif"),
-          url("screen/dots-1px.gif"),
-          url("screen/cross-1px.gif"),
-          url("screen/cross-2px.gif"),
-          url("screen/boxes-5px.png"),
-          url("screen/white-grid-45px.png"),
-          url("screen/convergence-45px.png"),
-          url("screen/breathing-block.gif");
+          image_url("screen/horizontal-line-1px.gif"),
+          image_url("screen/horizontal-line-2px.gif"),
+          image_url("screen/vertical-line-1px.gif"),
+          image_url("screen/vertical-line-2px.gif"),
+          image_url("screen/dots-1px.gif"),
+          image_url("screen/cross-1px.gif"),
+          image_url("screen/cross-2px.gif"),
+          image_url("screen/boxes-5px.png"),
+          image_url("screen/white-grid-45px.png"),
+          image_url("screen/convergence-45px.png"),
+          image_url("screen/breathing-block.gif");
   width: 0;
   height: 0;
   display: inline-block;
@@ -1416,25 +1416,24 @@ a { text-decoration: none;}
 #test-solid-white{ background-color: #FFF; }
 #test-solid-black { background-color: #000; }
 
-#test-horizontal-line-1px { background: #000 url("screen/horizontal-line-1px.gif") repeat center center; }
-#test-horizontal-line-2px { background: #000 url("screen/horizontal-line-2px.gif") repeat center center; }
-#test-vertical-line-1px { background: #000 url("screen/vertical-line-1px.gif") repeat center center; }
-#test-vertical-line-2px { background: #000 url("screen/vertical-line-2px.gif") repeat center center; }
-#test-dots-1px { background: #000 url("screen/dots-1px.gif") repeat center center; }
-#test-cross-1px { background: #000 url("screen/cross-1px.gif") repeat center center; }
-#test-cross-2px { background: #000 url("screen/cross-2px.gif") repeat center center; }
+#test-horizontal-line-1px { background: #000 image_url("screen/horizontal-line-1px.gif") repeat center center; }
+#test-horizontal-line-2px { background: #000 image_url("screen/horizontal-line-2px.gif") repeat center center; }
+#test-vertical-line-1px { background: #000 image_url("screen/vertical-line-1px.gif") repeat center center; }
+#test-vertical-line-2px { background: #000 image_url("screen/vertical-line-2px.gif") repeat center center; }
+#test-dots-1px { background: #000 image_url("screen/dots-1px.gif") repeat center center; }
+#test-cross-1px { background: #000 image_url("screen/cross-1px.gif") repeat center center; }
+#test-cross-2px { background: #000 image_url("screen/cross-2px.gif") repeat center center; }
 
 #test-pattern {
-  background-color: #000;
-  background: url("screen/boxes-5px.png") no-repeat top left,
-  url("screen/boxes-5px.png") no-repeat top right,
-  url("screen/boxes-5px.png") no-repeat bottom left,
-  url("screen/boxes-5px.png") no-repeat bottom right,
-  url("screen/boxes-5px.png") no-repeat center center #000;
+  background: image_url("screen/boxes-5px.png") no-repeat top left,
+  image_url("screen/boxes-5px.png") no-repeat top right,
+  image_url("screen/boxes-5px.png") no-repeat bottom left,
+  image_url("screen/boxes-5px.png") no-repeat bottom right,
+  image_url("screen/boxes-5px.png") no-repeat center center #000;
 }
 
-#test-white-grid { background: #000 url("screen/white-grid-45px.png") repeat center center; }
-#test-convergence { background: #000 url("screen/convergence-45px.png") repeat center center; }
+#test-white-grid { background: #000 image_url("screen/white-grid-45px.png") repeat center center; }
+#test-convergence { background: #000 image_url("screen/convergence-45px.png") repeat center center; }
 
 #test-contrast-white { background-color: #FFF; color: #000; }
 #test-contrast-black { background-color: #000; color: #FFF; }
@@ -1464,7 +1463,7 @@ a { text-decoration: none;}
 
 #test-stability  table td {
   border: 6px solid #000;
-  background: #000 url("screen/breathing-block.gif") repeat center center;
+  background: #000 image_url("screen/breathing-block.gif") repeat center center;
 }
 
 .test-gradient  img{ width: 100%; height: 100%; }

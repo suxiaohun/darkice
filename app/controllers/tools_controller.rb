@@ -10,9 +10,25 @@ class ToolsController < ApplicationController
   def json; end
 
   def json_format; end
+
   def screen; end
 
   def colors; end
+
+  def authorization
+    if request.post?
+      key = params[:key_id]
+      secret = params[:key_secret]
+      timestamp = params[:timestamp]
+      nonce = params[:nonce]
+
+      digest = OpenSSL::Digest.new('sha256')
+      data = [key, timestamp, nonce]
+
+      @sign = OpenSSL::HMAC.hexdigest(digest, secret, data.sort.join)
+      @sign_str = "key=#{key},nonce=#{nonce},timestamp=#{timestamp},signature=#{@sign}"
+    end
+  end
 
   def mirror
     data = {

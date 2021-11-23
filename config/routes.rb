@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'hammerspoon', to: 'tools#hammerspoon'
   get 'wow', to: 'tools#wow'
   get 'screen', to: 'tools#screen'
+  get 'authorization', to: 'tools#authorization'
+  post 'authorization', to: 'tools#authorization'
 
   get 'skills', to: 'common#skills'
   get 'items', to: 'common#items'

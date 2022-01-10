@@ -3,6 +3,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
     create_table :books do |t|
       t.string :name, :default => ''
       t.string :display_name, :default => ''
+      t.string :uuid
       t.integer :author_id
       t.integer :category_id
       t.string :tag, :default => '' # 一本书可能会有多种tag（仅用来排序和检索），但仍然只属于一种category

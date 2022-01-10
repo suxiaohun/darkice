@@ -21,14 +21,14 @@
     <article style="text-align: center;">
       <h1> <%= @book.display_name %><span style="color:#ab8248"> #<%= @book.tag %># </span></h1>
       <p>
-        <input type="range" min="0" max="100" value="0" style="line-height:50px;align-self: center;" onchange="change_process()" id="range"/>
-        <span id="rangeShow" style="line-height: 50px;display: inline-block;">0%</span>
+        <input type="range" min="0" max="100" value="<%= @data[:rate] %>" style="line-height:50px;align-self: center;" onchange="change_process()" id="range"/>
+        <span id="rangeShow" style="line-height: 50px;display: inline-block;"><%= @data[:rate] %>%</span>
         <%= select_tag "credit_card", options_for_select([[10, 10], [20, 20], [50, 50]], cookies[:page_size]), onchange: "change_pagesize()" %>
       </p>
     </article>
     <article>
       <section class="post-content markdown-body" id="book-section">
-        <%= render partial: 'content', locals: {data: @data} %>
+        <%= render partial: 'content', locals: { data: @data } %>
       </section>
     </article>
   </section>

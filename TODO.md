@@ -1,6 +1,7 @@
 
 
 TODO
+
 - Implement socket example
 - 1vn
 - use vue split project
@@ -14,7 +15,8 @@ TODO
 
 
 
+
 DONE
 - tcp websocket
-- 
+- books add reading cookie
 - rpc call

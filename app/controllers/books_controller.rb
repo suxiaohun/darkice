@@ -17,20 +17,21 @@ class BooksController < ApplicationController
     end
   end
 
-
   # GET /books/1
   # GET /books/1.json
   def show
     @data = {}
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
+      io.pos = cookies[book_reading_pos_key].to_i
       @data[:pre_pos] = io.pos
       @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
+      @data[:lines][0] = @data[:lines][0].encode("UTF-8", invalid: :replace, replace: "")
       @data[:next_pos] = io.pos
     end
+    @data[:rate] = range_rate(@data[:curr_pos])
   end
-
 
   def page_size
     page_size = params[:page_size].to_i
@@ -39,7 +40,6 @@ class BooksController < ApplicationController
       page_size = BOOK_DEFAULT_LINES
     end
     cookies[:page_size] = page_size
-
     current_pos = params[:current_pos].to_i
 
     @data = {}
@@ -50,23 +50,23 @@ class BooksController < ApplicationController
       @data[:lines] = io.first(get_page_size)
       @data[:next_pos] = io.pos
     end
-
+    @data[:rate] = range_rate(@data[:curr_pos])
   end
 
   def goto
     process = params[:process].to_i
-
     unless process >= 0 && process <= 100
       process = 0
     end
-    _pos = get_book_redis_key("#{@book.name}-#{process}")
 
     @data = {}
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
-      io.pos = _pos.to_i
+      io.pos = book_total_pos * process / 100
+      cookies[book_reading_pos_key] = io.pos
       @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
+      @data[:lines][0] = @data[:lines][0].encode("UTF-8", invalid: :replace, replace: "") # 文件指针切分可能会把一个完整字符拆分，减少2个字符即可(一个汉字占三个字节)
       @data[:next_pos] = io.pos
     end
   end
@@ -76,15 +76,12 @@ class BooksController < ApplicationController
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
       io.pos = (params[:next_pos].to_i || 0)
+      cookies[book_reading_pos_key] = io.pos
       @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
       @data[:next_pos] = io.pos
     end
-
-    total_pos = get_book_redis_key("#{@book.name}-total").to_i
-    @data[:rate] = (@data[:curr_pos] * 100.0 / total_pos).round(2)
-
-    puts ".....#{@data[:rate]}"
+    @data[:rate] = range_rate(@data[:curr_pos])
   end
 
   # GET /books/new
@@ -146,24 +143,23 @@ class BooksController < ApplicationController
 
     es_query[:from] = 0
     es_query[:size] = 1000 # es默认是10条
-    es_query[:query] = {"match_all": {}}
+    es_query[:query] = { "match_all": {} }
 
     if params[:name].present?
       es_query[:query] = {
-          wildcard: {
-              name: '*' + params[:name] + "*"
-          }
+        wildcard: {
+          name: '*' + params[:name] + "*"
+        }
       }
     end
 
     es_query[:sort] = [
-        {"created_at": {"order": "desc"}}
+      { "created_at": { "order": "desc" } }
     ]
 
     logs = Book.__elasticsearch__.search(es_query)
     @books = logs.records.page(params[:page] || 1)
   end
-
 
   private
 
@@ -182,30 +178,25 @@ class BooksController < ApplicationController
     page_size.to_i
   end
 
-  # 使用redis缓存book的行数\位置信息
-  def get_book_redis_key(key)
-    unless BOOK_REDIS.get(key)
-      _pos_hash = {}
-      _pos_hash[0] = 0
+  def book_total_pos
+    total_pos = BOOK_REDIS.get(book_total_pos_key)
+    return total_pos.to_i if total_pos
 
-      File.open(@book.path) do |io|
-        _temp_hash = {}
-        count = 0
-        io.each_line do
-          count += 1
-          _temp_hash[count] = io.pos
-        end
-        # 文件pos指针,用来计算进度条
-        BOOK_REDIS.set("#{@book.name}-total", _temp_hash[count])
-
-        _op = count / 100
-        100.times do |i|
-          BOOK_REDIS.set("#{@book.name}-#{0}", 0) if i == 0
-          i += 1
-          BOOK_REDIS.set("#{@book.name}-#{i}", _temp_hash[_op * i])
-        end
-      end
+    File.open(@book.path) do |io|
+      BOOK_REDIS.set(book_total_pos_key, io.size)
     end
-    BOOK_REDIS.get(key)
+    BOOK_REDIS.get(book_total_pos_key).to_i
+  end
+
+  def book_total_pos_key
+    "#{@book.uuid}_total_pos"
+  end
+
+  def book_reading_pos_key
+    "#{@book.uuid}_reading_pos"
+  end
+
+  def range_rate(curr_pos)
+    (curr_pos * 100.0 / book_total_pos.to_i).round(2)
   end
 end

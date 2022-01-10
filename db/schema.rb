@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_04_22_043156) do
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", default: ""
     t.string "display_name", default: ""
+    t.string "uuid"
     t.integer "author_id"
     t.integer "category_id"
     t.string "tag", default: ""

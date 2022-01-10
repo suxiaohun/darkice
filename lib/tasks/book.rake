@@ -48,6 +48,7 @@ namespace :book do
       book = Book.new
       book.name = v[:name]
       book.display_name = v[:name]
+      book.uuid = Digest::MD5.hexdigest(v[:name])
       book.author = Author.find_or_create_by!(name: v[:author] || '未知')
       book.category = Category.find_or_create_by!(name: category)
       book.tag = v[:tag]
@@ -59,31 +60,32 @@ namespace :book do
 
   desc "init the books"
   task init: :environment do
-
-    flag1 = system "rake elasticsearch:create_index class=book"
+    es_flag = ENV["es"]
+    if es_flag.present?
+      system "rake elasticsearch:create_index class=book"
+    end
 
     # 如果数据存在，同步数据到es
     #system "rake elasticsearch:rake elasticsearch:sync_data  class=book"
 
-    if flag1
-      Book.destroy_all
+    BOOK_REDIS.flushall
+    Book.destroy_all
 
-      init_book_list('修真')
-      init_book_list('中华奇书')
-      init_book_list('卫斯理')
-      init_book_list('男主玄幻')
-      init_book_list('男主网游')
-      init_book_list('男主穿越')
-      init_book_list('女主玄幻')
-      init_book_list('女主网游')
-      init_book_list('女主穿越')
-      init_book_list('魔兽世界')
-      init_book_list('魔法')
+    init_book_list('修真')
+    init_book_list('中华奇书')
+    init_book_list('卫斯理')
+    init_book_list('男主玄幻')
+    init_book_list('男主网游')
+    init_book_list('男主穿越')
+    init_book_list('女主玄幻')
+    init_book_list('女主网游')
+    init_book_list('女主穿越')
+    init_book_list('魔兽世界')
+    init_book_list('魔法')
 
-      Book.all.each do |book|
-        book.pre_content = get_pre_content(book.path)
-        book.save!
-      end
+    Book.all.each do |book|
+      book.pre_content = get_pre_content(book.path)
+      book.save!
     end
 
   end

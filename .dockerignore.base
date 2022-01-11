@@ -15,6 +15,8 @@
 
 /public/packs/*
 !/public/packs/*.json
+public/books
+public/videos
 
 app/assets/*
 !/app/assets/config/manifest.js

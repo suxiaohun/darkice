@@ -42,14 +42,16 @@ body {
 /* markdown */
 
 
+.markdown-body {
+  margin-top: 34px;
+}
 
-.markdown-body{ margin-top: 34px;}
 .markdown-body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   //color: #333;
   overflow: hidden;
-  font-family: "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
+  font-family: "SF UI Display", ".PingFang SC", "PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
 
 
   font-size: 16px;
@@ -118,7 +120,8 @@ body {
 
 .markdown-body table {
   border-collapse: collapse;
-  border-spacing: 0; border: none;
+  border-spacing: 0;
+  border: none;
 }
 
 .markdown-body td,
@@ -253,11 +256,11 @@ body {
   display: inline-block;
 }
 
-.markdown-body>*:first-child {
+.markdown-body > *:first-child {
   margin-top: 0 !important;
 }
 
-.markdown-body>*:last-child {
+.markdown-body > *:last-child {
   margin-bottom: 0 !important;
 }
 
@@ -287,7 +290,7 @@ body {
   margin-bottom: 16px;
   font-weight: bold;
   /* chinese */
-  font-family: "PT Sans", "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
+  font-family: "PT Sans", "SF UI Display", ".PingFang SC", "PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
 
 }
 
@@ -391,7 +394,7 @@ body {
   margin-bottom: 0;
 }
 
-.markdown-body li>p {
+.markdown-body li > p {
   margin-top: 16px;
 }
 
@@ -417,11 +420,11 @@ body {
   border-left: 4px solid #ddd;
 }
 
-.markdown-body blockquote>:first-child {
+.markdown-body blockquote > :first-child {
   margin-top: 0;
 }
 
-.markdown-body blockquote>:last-child {
+.markdown-body blockquote > :last-child {
   margin-bottom: 0;
 }
 
@@ -464,7 +467,7 @@ body {
   padding-bottom: 0.2rem;
   margin: 0;
   font-size: 85%;
-  background-color: rgba(0,0,0,0.04);
+  background-color: rgba(0, 0, 0, 0.04);
   border-radius: 3px;
 }
 
@@ -474,7 +477,7 @@ body {
   content: "\00a0";
 }
 
-.markdown-body pre>code {
+.markdown-body pre > code {
   padding: 0;
   margin: 0;
   font-size: 100%;
@@ -546,7 +549,7 @@ body {
   list-style-type: none;
 }
 
-.markdown-body .task-list-item+.task-list-item {
+.markdown-body .task-list-item + .task-list-item {
   margin-top: 3px;
 }
 
@@ -557,8 +560,7 @@ body {
 }
 
 
-
-#site-main{
+#site-main {
   flex: 1;
 }
 
@@ -632,14 +634,14 @@ nav > ul {
 
 #main-menu > ul {
   display: flex;
-  height: 5rem;
+  min-height: 5rem;
   justify-content: space-around;
   align-items: center;
   font-size: 16px;
 }
 
 #main-menu > ul > li + li {
-  margin-left: 20px;
+  //margin-left: 20px;
 }
 
 #main-menu > ul > li:nth-child(8n+1) {
@@ -661,9 +663,11 @@ nav > ul {
 #main-menu > ul > li:nth-child(8n+5) {
   color: #955694;
 }
+
 #main-menu > ul > li:nth-child(8n+6) {
   color: #354d95;
 }
+
 #main-menu > ul > li:nth-child(8n+7) {
   color: #f51b35;
 }
@@ -701,7 +705,7 @@ nav > ul {
 }
 
 
-.post-card-shim{
+.post-card-shim {
   flex: 1 1 320px;
   overflow: hidden;
   margin: 0 20px;
@@ -746,11 +750,13 @@ nav > ul {
   border-radius: 5px;
   box-shadow: inset 0 0 20px rgba(62, 61, 66, 0.75);
 }
+
 .post-card-featured-img > img {
   width: 100%;
   height: 100%;
   border-radius: 5px;
 }
+
 .post-card-excerpt {
   flex: 1 1;
   overflow: hidden;
@@ -854,7 +860,7 @@ nav > ul {
   left: 20px;
 }
 
-#comment-area{
+#comment-area {
   float: left;
   width: 300px;
   min-height: 300px;
@@ -873,14 +879,14 @@ nav > ul {
   line-height: 1.6;
 }
 
-#comment-main>* {
+#comment-main > * {
   padding: 20px 20px 20px 20px;
   border-radius: 15px;
   background: #fafafa;
-  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
 }
 
-#comment-main>*+* {
+#comment-main > * + * {
   margin-top: 1.5rem;
 }
 
@@ -891,78 +897,76 @@ nav > ul {
   line-height: 1.6;
 }
 
-#post-main>* {
+#post-main > * {
   padding: 20px 60px 50px;
   border-radius: 15px;
   background: #fafafa;
-  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
 }
 
-#post-main>*+* {
+#post-main > * + * {
   margin-top: 1.5rem;
 }
 
-#article-content .post-title{
+#article-content .post-title {
   height: 3em;
   border-bottom: 1px dashed rgb(213, 213, 213);
   text-align: center;
 }
 
-#article-related{
+#article-related {
   padding-bottom: 1.5rem;
 }
 
-#article-related>.article-neighbour{
+#article-related > .article-neighbour {
   display: flex;
   padding-bottom: 0.5em;
   border-bottom: 1px dotted rgb(213, 213, 213);
 }
-.article-prev-next{
+
+.article-prev-next {
+  text-align: center;
   flex: 1;
 }
 
-.article-prev-next>a{
+.article-prev-next > a {
   color: #4183c4;
 }
 
-.article-recent>ul {
+.article-recent > ul {
   display: flex;
   flex-wrap: wrap;
 }
-.article-recent>ul>li {
+
+.article-recent > ul > li {
   width: 50%;
   color: #4183c4;
 }
 
 
-
-
-
-
-
-
-#article-archives{
+#article-archives {
   padding: 2.5rem 10vw 0;
 }
 
 
-
-#article-archives>.article-wrap {
+#article-archives > .article-wrap {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.article-year{
+.article-year {
   width: 100%;
   height: 5rem;
   font-size: 2em;
   line-height: 5rem;
   text-align: center;
 }
+
 .article-year:nth-of-type(n) {
   color: #61dafb;
 }
+
 .article-year:nth-of-type(2n) {
   color: #F7DF1E;
 }
@@ -979,12 +983,12 @@ nav > ul {
   color: #3399FE;
 }
 
-#article-archives .article{
+#article-archives .article {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 2rem;
-  width:250px;
+  width: 250px;
   height: 150px;
   padding: 1.5em;
   background-size: cover;
@@ -996,7 +1000,7 @@ nav > ul {
 }
 
 #article-archives .article-shim {
-  width:250px;
+  width: 250px;
   height: 0;
 }
 
@@ -1008,6 +1012,7 @@ footer {
   color: #91a0b7;
   padding: 3rem 0;
 }
+
 footer > .copyright {
   text-align: center;
 }

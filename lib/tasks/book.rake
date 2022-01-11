@@ -82,6 +82,7 @@ namespace :book do
     init_book_list('女主穿越')
     init_book_list('魔兽世界')
     init_book_list('魔法')
+    init_book_list('1024')
 
     Book.all.each do |book|
       book.pre_content = get_pre_content(book.path)

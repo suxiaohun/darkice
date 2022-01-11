@@ -34,6 +34,34 @@
   </section>
 </main>
 
+<div style="position: fixed;bottom: 0;right: 0;border: 1px solid darkgrey;background: white">
+  <button type="button" id="history-btn">阅读记录</button>
+  <div id="history-div">
+    <% cookies[:reading_history] && JSON.parse(cookies[:reading_history]).to_a.reverse.to_h.each do |id, name| %>
+      <li class="history-li">《<%= name %>》&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '-->', { controller: "books", action: "show", id: id },class: 'continue-btn' %></li>
+    <% end %>
+  </div>
+
+</div>
+
+<style>
+  .history-li{
+      text-underline: none;
+      margin: 5px 5px;
+  }
+
+  #history-div{
+      display: none;
+  }
+
+  .continue-btn{
+      display: inline-block;
+      border: 1px solid green;
+      padding: 2px 2px;
+      cursor: pointer;
+  }
+
+</style>
 <script type="text/javascript">
     function change_process() {
         var process = $("#range").val();
@@ -48,4 +76,10 @@
         $("#current_pos").val($("#curr_pos").val());
         $("#pagesizeForm").click();
     }
+
+    $(function(){
+        document.getElementById("history-btn").addEventListener("click",function (){
+            $("#history-div").toggle()
+        })
+    })
 </script>

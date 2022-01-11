@@ -69,6 +69,7 @@ class BooksController < ApplicationController
       @data[:lines][0] = @data[:lines][0].encode("UTF-8", invalid: :replace, replace: "") # 文件指针切分可能会把一个完整字符拆分，减少2个字符即可(一个汉字占三个字节)
       @data[:next_pos] = io.pos
     end
+    save_reading_history
   end
 
   def next
@@ -82,6 +83,7 @@ class BooksController < ApplicationController
       @data[:next_pos] = io.pos
     end
     @data[:rate] = range_rate(@data[:curr_pos])
+    save_reading_history
   end
 
   # GET /books/new
@@ -198,5 +200,14 @@ class BooksController < ApplicationController
 
   def range_rate(curr_pos)
     (curr_pos * 100.0 / book_total_pos.to_i).round(2)
+  end
+
+  def save_reading_history
+    cookies[:reading_history] ||= "{}"
+    _h = JSON.parse cookies[:reading_history]
+    _h.delete(@book.id.to_s)
+    _h[@book.id.to_s] = @book.name
+    _h.shift if _h.size > 5
+    cookies[:reading_history] = _h.to_json
   end
 end

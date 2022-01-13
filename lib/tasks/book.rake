@@ -20,41 +20,44 @@ namespace :book do
     pre_content
   end
 
-  def init_book_list(category)
+  def init_book_list
     path_prefix = "lib/utils/books/"
-    path = path_prefix + category + '.yml'
-
     FileUtils.cd(path_prefix) do
       FileUtils.rm Dir.glob('*.yml')
     end
+    Dir.glob("public/books/*") do |origin_path|
+      category = origin_path.split("/")[-1]
+      path = path_prefix + category + '.yml'
 
-    unless File.exist? path
-      origin_path = BOOK_PATH_PREFIX + category + '/'
-      File.open(path, 'w') do |io|
-        FileUtils.cd(origin_path) do
-          files = Dir.glob("*.[tT][xX][tT]")
-          files.each do |file_name|
-            _zh_name = file_name.split('.')[0]
-            _en_name = Pinyin.t(_zh_name, splitter: '')
-            io.puts _en_name + ':'
-            io.puts "  name: " + _zh_name
+      unless File.exist? path
+        File.open(path, 'w') do |io|
+          FileUtils.cd(origin_path) do
+            files = Dir.glob("*.[tT][xX][tT]")
+            files.each do |file_name|
+              _zh_name = file_name.split('.')[0]
+              _en_name = Pinyin.t(_zh_name, splitter: '')
+              io.puts _en_name + ':'
+              io.puts "  name: " + _zh_name
+            end
           end
         end
       end
-    end
 
-    books = YAML.load_file(path).deep_symbolize_keys
-    books.each do |_, v|
-      book = Book.new
-      book.name = v[:name]
-      book.display_name = v[:name]
-      book.uuid = Digest::MD5.hexdigest(v[:name])
-      book.author = Author.find_or_create_by!(name: v[:author] || '未知')
-      book.category = Category.find_or_create_by!(name: category)
-      book.tag = v[:tag]
-      book.path = BOOK_PATH_PREFIX + category + '/' + book.name + '.txt'
-      book.save!
-      puts "....create book: #{v[:name]}".green
+      puts "=====path: #{path}"
+
+      books = YAML.load_file(path).deep_symbolize_keys rescue {}
+      books.each do |_, v|
+        book = Book.new
+        book.name = v[:name]
+        book.display_name = v[:name]
+        book.uuid = Digest::MD5.hexdigest(v[:name])
+        book.author = Author.find_or_create_by!(name: v[:author] || '未知')
+        book.category = Category.find_or_create_by!(name: category)
+        book.tag = v[:tag]
+        book.path = origin_path + '/' + book.name + '.txt'
+        book.save!
+        puts "....create book: #{v[:name]}".green
+      end
     end
   end
 
@@ -71,18 +74,7 @@ namespace :book do
     BOOK_REDIS.flushall
     Book.destroy_all
 
-    init_book_list('修真')
-    init_book_list('中华奇书')
-    init_book_list('卫斯理')
-    init_book_list('男主玄幻')
-    init_book_list('男主网游')
-    init_book_list('男主穿越')
-    init_book_list('女主玄幻')
-    init_book_list('女主网游')
-    init_book_list('女主穿越')
-    init_book_list('魔兽世界')
-    init_book_list('魔法')
-    init_book_list('1024')
+    init_book_list
 
     Book.all.each do |book|
       book.pre_content = get_pre_content(book.path)

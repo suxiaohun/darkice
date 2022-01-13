@@ -634,7 +634,7 @@ nav > ul {
 
 #main-menu > ul {
   display: flex;
-  min-height: 5rem;
+  min-height: 50px;
   justify-content: space-around;
   align-items: center;
   font-size: 16px;
@@ -1015,4 +1015,27 @@ footer {
 
 footer > .copyright {
   text-align: center;
+}
+
+.history-li{
+  text-underline: none;
+  margin: 5px 5px;
+}
+
+#history-div{
+  display: none;
+  font-weight: bold;
+}
+
+#history-btn{
+  background: #0c5460;
+  color: white;
+  padding: 5px;
+}
+
+.continue-btn{
+  display: inline-block;
+  border: 1px solid green;
+  padding: 2px 2px;
+  cursor: pointer;
 }

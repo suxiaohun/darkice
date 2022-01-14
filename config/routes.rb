@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'img_to_base64', to: 'tools#img_to_base64'
+  post 'img_to_base64', to: 'tools#img_to_base64'
 
-  get 'img_to_base64',to: 'tools#img_to_base64'
-  post 'img_to_base64',to: 'tools#img_to_base64'
-
-  get 'chat',to: 'chat_rooms#index'
-  get 'compress',to: 'tools#compress'
-  get 'sense',to: 'tools#sense'
-  post 'sense_encode',to: 'tools#sense_encode'
+  get 'chat', to: 'chat_rooms#index'
+  get 'compress', to: 'tools#compress'
+  get 'sense', to: 'tools#sense'
+  post 'sense_encode', to: 'tools#sense_encode'
   get 'test_timeout', to: 'common#test_timeout'
   get 'test', to: 'common#test'
   get 'markdown', to: 'tools#markdown'
@@ -23,17 +22,16 @@ Rails.application.routes.draw do
   get 'rpc', to: 'tools#rpc'
   get 'rpc2', to: 'tools#rpc2'
 
-
   match 'fates/auth', to: 'fates#auth', :via => [:get, :post]
 
   resources :fates
-  get 'yys',to: 'yys#index'
+  get 'yys', to: 'yys#index'
 
-  get 'test',to: "yys#test"
+  get 'test', to: "yys#test"
 
-  post 'yys/update_info',to: 'yys#update_info'
-  get 'yys/guess',to: 'yys#guess'
-  get 'yys/simulate',to: 'yys#simulate'
+  post 'yys/update_info', to: 'yys#update_info'
+  get 'yys/guess', to: 'yys#guess'
+  get 'yys/simulate', to: 'yys#simulate'
   match 'yys/auth', to: 'yys#auth', :via => [:get, :post]
   get 'yys/rate', to: 'yys#rate'
   post 'yys/summon', to: 'yys#summon'
@@ -43,8 +41,7 @@ Rails.application.routes.draw do
   post 'yys/add_patch', to: 'yys#add_patch'
   post 'yys/add_region', to: 'yys#add_region'
 
-
-
+  match 'books/auth', to: 'books#auth', :via => [:get, :post]
   get 'books/category/:id', to: 'books#category'
   get 'books/next/:next_pos/:id', to: 'books#next'
   get 'books/goto', to: 'books#goto'
@@ -54,7 +51,7 @@ Rails.application.routes.draw do
 
   resources :books
 
-  get 'colors',to: 'tools#colors'
+  get 'colors', to: 'tools#colors'
 
   match 'json', to: 'tools#json', :via => [:get, :post]
   match 'sign', to: 'tools#sign', :via => [:get, :post]
@@ -64,9 +61,6 @@ Rails.application.routes.draw do
   get 'get_mobile_area', to: 'tools#get_mobile_area'
   post 'comment_save', to: 'tools#comment_save'
   get '/v2/pause/manifests/3.1', to: 'tools#mirror'
-
-
-
 
   root 'common#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

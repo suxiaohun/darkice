@@ -71,8 +71,9 @@ namespace :book do
     # 如果数据存在，同步数据到es
     #system "rake elasticsearch:rake elasticsearch:sync_data  class=book"
 
-    BOOK_REDIS.flushall
+    Redis.new(REDIS_CONFIG).flushall
     Book.destroy_all
+    Category.destroy_all
 
     init_book_list
 

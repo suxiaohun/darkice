@@ -1,11 +1,9 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :page_size, :next, :goto, :edit, :update, :destroy]
 
-  # GET /books
-  # GET /books.json
   def index
-    # This project supply some useful tools and examples about ruby、go、c e.g.
-    ids = Book.pluck(:id)
+    c = Category.find_by(name: "1024")
+    ids = Book.where.not(category_id: c.id).pluck(:id)
     @books = Book.find(ids.sample(10))
   end
 
@@ -13,7 +11,20 @@ class BooksController < ApplicationController
     if params[:id] == 'all'
       @books = Book.includes(:author).all
     else
+      c = Category.find_by(id: params[:id])
+      if c && c.name == "1024" && cookies[:auth_code] != BOOK_AUTH_CODE
+        redirect_to action: "auth"
+      end
       @books = Book.includes(:author).where(category_id: params[:id])
+    end
+  end
+
+  def auth
+    if request.post?
+      if params[:auth_code] == BOOK_AUTH_CODE
+        cookies[:auth_code] = BOOK_AUTH_CODE
+        redirect_to action: "index"
+      end
     end
   end
 

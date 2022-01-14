@@ -33,6 +33,7 @@
   <div style="padding-top: 200px;text-align: center;">
 
     <%= form_tag('/books/auth', method: :post, remote: true) do %>
+      <%= token_tag %>
       <%= text_field_tag 'auth_code', nil, required: true, :placeholder => '请输入验证码', :class => 'text_tag', required: true %>
       <br>
       <br>

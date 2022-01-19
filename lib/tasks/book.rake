@@ -84,12 +84,11 @@ namespace :book do
 
   end
 
-  # rake book:rename path=/Users/crystal/Documents/books/小说/0510/ss
-  desc "rename file in the spec dir"
+  desc "use number as the new name of the book"
   task rename: :environment do
     dir_path = ENV["path"]
     unless dir_path.present?
-      puts "请指定路径:  rake book:encode path=/home/xiaopang/xxx".red
+      puts "请指定路径:  rake book:encode path=/home/crystal/xxx".red
       next
     end
     begin
@@ -108,41 +107,33 @@ namespace :book do
     end
   end
 
-  # rake book:encode path=/Users/crystal/Documents/books/小说/0510/ss
-  desc "change book encoding"
-  task encode: :environment do
-    # options = {}
-    #
-    # o = OptionParser.new
-    # o.banner = "Usage: rake book:encode -- [options]"
-    # o.on("-p PATH", "--path PATH","The absolute path you want use") { |path|
-    #   options[:path] = path
-    # }
-    # o.on("-r", "--rename","Rename files") {
-    #   options[:rename] = true
-    # }
-    # args = o.order!(ARGV) {}
-    # o.parse!(args)
-    #
-    # puts options
-    # exit
-
+  desc "book format"
+  task format: :environment do
     dir_path = ENV["path"]
-    rename = ENV["rename"]
-
     unless dir_path.present?
-      puts "请指定路径:  rake book:encode path=/home/xiaopang/xxx".red
+      puts "请指定路径:  rake book:encode path=/home/crystal/xxx".red
       next
     end
+
     begin
       FileUtils.cd(dir_path) do
-        puts "current dir: #{FileUtils.pwd}".green
-        convert_book_encoding
+        FileUtils.rm_rf(BOOK_BACKUP_DIR)
+        files = Dir.glob("**/*.[tT][xX][tT]")
+        files.each_with_index do |old_name, i|
+          next if File.zero?(old_name)
+
+          new_name = "#{BOOK_BACKUP_DIR}/#{old_name.gsub(" ", "")[0..-4]}txt"
+          create_backup_dir(new_name)
+
+          puts "------#{i + 1}---#{old_name}---#{new_name}"
+          File.open(old_name) do |input|
+            content = convert_utf8(input.read)
+            File.open(new_name, 'w') do |output|
+              output.write(content)
+            end
+          end
+        end
       end
-    rescue Errno::ENOENT
-      puts "无效的路径: #{ARGV[1]}".red
-    rescue => e
-      puts e.message.red
     end
   end
 
@@ -187,51 +178,6 @@ namespace :book do
     end
   end
 
-  # 将目录下的所有txt文件，全部遍历，转码成utf8，并生成一份新的utf8编码的文件
-  def convert_book_encoding
-    error_files = []
-    count = 0
-    FileUtils.rm_rf('backup')
-    sleep 2
-    files = Dir.glob("**/*.[tT][xX][tT]")
-    files.each do |file_name|
-      count += 1
-      dirname = File.dirname("backup/#{file_name}")
-      unless File.directory?(dirname)
-        FileUtils.mkdir_p(dirname)
-      end
-
-      begin
-        next if File.zero?(file_name)
-        File.open(file_name) do |input|
-          content = input.read
-
-          # 如果编码错乱，需要转成utf-8后，再copy
-          if content.force_encoding('GB18030').valid_encoding?
-            File.open("backup/#{file_name}", 'w') do |output|
-              output.write(content.encode('UTF-8'))
-            end
-          end
-
-          # 如果文件编码本身就是utf-8，则copy一份即可
-          if content.force_encoding('UTF-8').valid_encoding?
-            File.open("backup/#{file_name}", 'w') do |output|
-              output.write(content)
-            end
-          end
-
-        end
-        puts "converting: #{file_name}".green
-      rescue
-        error_files << file_name
-        # remove this error file
-        # File.unlink(file_name)
-        puts "----无法解析文件编码，请手动转码-----------#{file_name}----------------".red
-      end
-    end
-    puts "........共计#{count}本"
-  end
-
   # 验证转码后的文件是否正确转成了utf8
   def verify
     count = 0
@@ -256,6 +202,22 @@ namespace :book do
     end
     error_valid_files.each(&method(:puts))
     puts "........共计#{count}本"
+  end
+
+  def create_backup_dir(file_name)
+    dirname = File.dirname(file_name)
+    unless File.directory?(dirname)
+      FileUtils.mkdir_p(dirname)
+    end
+  end
+
+  def convert_utf8(content)
+    return content if content.force_encoding('UTF-8').valid_encoding?
+    if content.force_encoding('GB18030').valid_encoding?
+      content.encode('UTF-8')
+    else
+      raise "unsupported encode, check the book"
+    end
   end
 
 end

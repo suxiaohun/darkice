@@ -22,7 +22,7 @@ class BooksController < ApplicationController
   def auth
     if request.post?
       if params[:auth_code] == BOOK_AUTH_CODE
-        cookies[:auth_code] = BOOK_AUTH_CODE
+        cookies.permanent[:auth_code] = BOOK_AUTH_CODE
         redirect_to action: "index"
       end
     end
@@ -50,7 +50,7 @@ class BooksController < ApplicationController
     unless page_size >= 5 && page_size <= 100
       page_size = BOOK_DEFAULT_LINES
     end
-    cookies[:page_size] = page_size
+    cookies.permanent[:page_size] = page_size
     current_pos = params[:current_pos].to_i
 
     @data = {}
@@ -74,7 +74,7 @@ class BooksController < ApplicationController
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
       io.pos = book_total_pos * process / 100
-      cookies[book_reading_pos_key] = io.pos
+      cookies.permanent[book_reading_pos_key] = io.pos
       @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
       @data[:lines][0] = @data[:lines][0].encode("UTF-8", invalid: :replace, replace: "") # 文件指针切分可能会把一个完整字符拆分，减少2个字符即可(一个汉字占三个字节)
@@ -88,7 +88,7 @@ class BooksController < ApplicationController
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
       io.pos = (params[:next_pos].to_i || 0)
-      cookies[book_reading_pos_key] = io.pos
+      cookies.permanent[book_reading_pos_key] = io.pos
       @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
       @data[:next_pos] = io.pos
@@ -214,11 +214,11 @@ class BooksController < ApplicationController
   end
 
   def save_reading_history
-    cookies[:reading_history] ||= "{}"
+    cookies.permanent[:reading_history] = cookies[:reading_history] || "{}"
     _h = JSON.parse cookies[:reading_history]
     _h.delete(@book.id.to_s)
     _h[@book.id.to_s] = @book.name
     _h.shift if _h.size > 5
-    cookies[:reading_history] = _h.to_json
+    cookies.permanent[:reading_history] = _h.to_json
   end
 end

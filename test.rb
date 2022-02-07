@@ -49,3 +49,39 @@ def spec(n,s1,s5,s9)
     ""
   end
 end
+
+# @param {String} digits
+# @return {String[]}
+def letter_combinations(digits)
+  return [] if digits.size == 0
+  _hash = {
+    "2"=> %w[a b c],
+    "3"=> %w[d e f],
+    "4"=> %w[g h i],
+    "5"=> %w[j k l],
+    "6"=> %w[m n o],
+    "7"=> %w[p q r s],
+    "8"=> %w[t u v],
+    "9"=> %w[w x y z]
+  }
+  arrs = []
+  digits.size.times do |i|
+    arrs << _hash[digits[i]]
+  end
+
+  arr_str = []
+  arrs.each do |arr|
+    if arr_str.empty?
+      arr_str = arr
+      next
+    end
+    temp = []
+    arr_str.each do |t|
+      arr.each do |a|
+        temp << (t + a)
+      end
+    end
+    arr_str = temp
+  end
+  arr_str
+end

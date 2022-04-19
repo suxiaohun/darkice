@@ -11,4 +11,4 @@ RUN bundle install
 
 COPY . .
 
-CMD ["bundle","exec", "unicorn","-c","config/unicorn.rb","-E","production"]
+CMD ["rails", "s", "-e", "production"]

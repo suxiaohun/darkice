@@ -50,9 +50,7 @@ gem 'bootsnap', '~> 1.9', '>= 1.9.1', require: false
 #gem 'capistrano-rvm'
 #gem 'capistrano-rbenv'
 
-#gem 'unicorn_metrics', '~> 0.2.1'
 
-gem 'unicorn', '~> 6.0'
 
 gem 'ed25519', '~> 1.2', '>= 1.2.4'
 gem 'bcrypt_pbkdf', '~> 1.1'

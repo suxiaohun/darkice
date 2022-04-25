@@ -248,6 +248,48 @@ class ToolsController < ApplicationController
     end
   end
 
+  def get_db_data
+    start_time = Time.now
+    models = %w[orders customers]
+
+    io = File.open("db_data.sql","w")
+    process_count = 0
+    limit = 2000
+    models.each do |model|
+      table_name = eval(model).table_name
+      all_column_names = eval(model).column_names
+
+      offset = 0
+      count = 0
+      total_count = eval(model).unscoped.count
+
+      while total_count > (offset)
+        records_scope = eval(model).unscoped.offset(offset).limit(limit)
+
+        records_scope.each do |obj|
+          column_names = all_column_names.dup
+          values = []
+          obj.attributes.each do |k,v|
+            if v.blank?
+              column_names.delete(k)  # 移除空值的key
+              next
+            end
+            values<< v.to_s
+          end
+          str = values.join("','")
+          io.puts("INSERT INTO #{table_name} (#{column_names.join(',')}) values('#{str}');")
+        end
+        process_count+=1
+        count+=1
+        offset = count*limit
+        puts "------已完成: #{process_count*limit}---"
+      end
+    end
+    io.close
+    end_time = Time.now
+    puts "total_time:  #{end_time - start_time} "
+  end
+
   # Only allow a trusted parameter "white list" through.
   def comment_params
     params.require(:comment).permit(:content)

@@ -1,6 +1,7 @@
 
 
 TODO
+- password generator
 - book rename task use backup dir 
 - Implement socket example
 - 1vn

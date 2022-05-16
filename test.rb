@@ -1,32 +1,19 @@
-def four_sum(nums, target)
-  arr = []
-  nums.each do |n1|
-    nums2 = nums.dup
-    nums2.delete_at(nums2.index(n1))
-    nums2.each do |n2|
-      nums3 = nums.dup
+# @param {String} s
+# @param {Integer} num_rows
+# @return {String}
+def convert(s, num_rows)
+  return s if num_rows == 1
+  k = s.size/(2*num_rows -2) + 1
 
-      nums3.delete_at(nums3.index(n1))
-      nums3.delete_at(nums3.index(n2))
-
-      nums3.sort
-
-      left = 0
-      right = nums3.size - 1
-      while left != right
-        t = target - n1 - n2
-        sum = nums3[left] + nums3[right]
-
-        if sum == t
-          temp = [n1, n2, nums3[left], nums3[right]].sort
-          arr << temp
-        elsif sum < t
-          left += 1
-        else
-          right -= 1
-        end
-      end
+  rows = {}
+  k.times do |i|
+    temp = s[i*(2*num_rows-2),2*num_rows-2]
+    num_rows.times do |row_index|
+      rows[row_index] ||= []
+      rows[row_index] << temp[row_index]
+      next if row_index == 0 || row_index == num_rows-1
+      rows[row_index] << temp[2*num_rows-2-row_index]
     end
   end
-  arr.uniq
+  rows.values.join
 end

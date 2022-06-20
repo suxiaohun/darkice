@@ -1,6 +1,7 @@
 
 
 TODO
+- ffi?
 - password generator
 - book rename task use backup dir 
 - Implement socket example

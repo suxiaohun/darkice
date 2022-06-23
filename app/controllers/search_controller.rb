@@ -29,6 +29,6 @@ class SearchController < ApplicationController
   def top_k
 
   end
-  
+
 
 end

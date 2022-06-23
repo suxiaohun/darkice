@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'persons/index'
+  get 'search/index'
+  get 'identity/index'
   get 'img_to_base64', to: 'tools#img_to_base64'
   post 'img_to_base64', to: 'tools#img_to_base64'
 

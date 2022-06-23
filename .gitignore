@@ -41,4 +41,5 @@ lib/utils/books/*
 
 Gemfile.lock
 
-
+Makefile
+TODO.md

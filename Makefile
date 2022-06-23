@@ -1,5 +1,5 @@
 
 test:
-	@DYLD_LIBRARY_PATH=/Users/crystal/workspace/xiaopang/include  ruby test.rb
+	@DYLD_LIBRARY_PATH=./include  ruby test.rb
 
 .PHONY: test

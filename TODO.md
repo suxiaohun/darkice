@@ -1,11 +1,13 @@
 
 
 TODO
+- ruby3.1.2 still can't use with rails 7.0.3
 - ffi?
 - password generator
 - book rename task use backup dir 
 - Implement socket example
 - 1vn
+  - facebook-faiss
 - use vue split project
 - markdown editor
 - markdown convert to pdf/word

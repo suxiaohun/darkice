@@ -10,8 +10,7 @@ class IdentityController < ApplicationController
     puts "blob1 size: #{blob1.size}" if blob1.present?
     puts "blob2 size: #{blob2.size}" if blob2.present?
 
-    # todo call_rpc
-    res = call_rpc(blob1, blob2)
+    res = call_grpc(method: GRPC_FACE_VERIFY, img1: blob1, img2: blob2)
 
     render json: res
   end
@@ -27,12 +26,6 @@ class IdentityController < ApplicationController
 
   def idnumber_match
 
-  end
-
-  private
-
-  def call_rpc(blob1, blob2)
-    { code: 1000, score: 0.8, message: "ok" }
   end
 
 end

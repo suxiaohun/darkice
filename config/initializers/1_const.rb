@@ -9,3 +9,9 @@ FATE_SECRET = '1122'
 SUMMON_MODE_SSR = 'SSR'
 SUMMON_MODE_SP = 'SP'
 SUMMON_MODE_SJ = 'SJ'
+
+GRPC_FACE_EXTRACT = "face_extract"
+GRPC_FEAT_VERIFY = "feat_verify"
+GRPC_FACE_VERIFY = "face_verify"
+GRPC_FACE_QUALITY = "face_quality"
+GRPC_FACE_LIST = "face_list"

@@ -18,6 +18,7 @@ gem 'redis-namespace', '~> 1.8', '>= 1.8.1'
 
 gem 'sidekiq', '~> 6.2', '>= 6.2.2'
 
+gem 'grpc', '~> 1.46', '>= 1.46.3'
 
 #gem 'execjs'
 

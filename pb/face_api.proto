@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package pb;
+
+
+service FaceApi {
+  rpc FaceVerify (FaceVerifyRequest) returns (FaceVerifyResponse) {}
+  rpc FaceExtract (FaceExtractRequest) returns (FaceExtractResponse) {}
+  rpc FeatVerify (FeatVerifyRequest) returns (FeatVerifyResponse) {}
+}
+
+message FaceVerifyRequest {
+  bytes img1 = 1;
+  bytes img2 = 2;
+}
+
+message FaceVerifyResponse {
+  int32 code = 1;
+  float score = 2;
+  string message = 3;
+}
+
+message ObjectFeature {
+  string type = 1;
+  int32 version = 2;
+  int32 flags = 3;
+  bytes blob = 4;
+}
+
+message FaceExtractRequest {
+  bytes img = 1;
+}
+
+message FaceExtractResponse {
+  int32 code = 1;
+  bytes blob = 2;
+  string message = 3;
+}
+
+message FeatVerifyRequest {
+  bytes feat1 = 1;
+  bytes feat2 = 2;
+}
+
+message FeatVerifyResponse {
+  int32 code = 1;
+  float score = 2;
+  string message = 3;
+}

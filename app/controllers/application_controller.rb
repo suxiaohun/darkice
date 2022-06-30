@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   private
 
   def call_grpc(method:, img: nil, img1: nil, img2: nil, feat1: nil, feat2: nil)
-    host = "127.0.0.1:50050"
+    # host = "127.0.0.1:50050"
+    host = "10.4.243.51:50050"
     client = Pb::FaceApi::Stub.new(host, :this_channel_is_insecure, timeout: 0.3)
 
     case method

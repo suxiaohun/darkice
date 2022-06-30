@@ -110,7 +110,16 @@ namespace :book do
   desc "book format"
   task format: :environment do
     dir_path = ENV["path"]
-    unless dir_path.present?
+    is_dir = true
+    single_file = ''
+    if dir_path.present?
+      if dir_path.include? '.txt'
+          paths = dir_path.split('/')
+          dir_path = paths[0..-2].join('/')
+          is_dir =false
+          single_file = paths[-1]
+      end
+    else
       puts "请指定路径:  rake book:encode path=/home/crystal/xxx".red
       next
     end
@@ -118,7 +127,11 @@ namespace :book do
     begin
       FileUtils.cd(dir_path) do
         FileUtils.rm_rf(BOOK_BACKUP_DIR)
-        files = Dir.glob("**/*.[tT][xX][tT]")
+        if is_dir
+          files = Dir.glob("**/*.[tT][xX][tT]")
+        else
+          files = [single_file]
+        end
         files.each_with_index do |old_name, i|
           next if File.zero?(old_name)
 

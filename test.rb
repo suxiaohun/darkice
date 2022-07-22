@@ -85,3 +85,24 @@ def letter_combinations(digits)
   end
   arr_str
 end
+
+
+# @param {String[]} strs
+# @return {String}
+def longest_common_prefix(strs)
+
+  strs = strs.sort_by(&:length)
+  min_str = strs[0]
+
+  prefix = ""
+
+  min_str.size.times do |i|
+    temp = min_str[i]
+    strs.each do |elem|
+      return prefix if elem[i] != temp
+    end
+    prefix+=temp
+  end
+
+  prefix
+end

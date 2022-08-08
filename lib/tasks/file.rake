@@ -25,10 +25,35 @@ namespace :file do
         dirname = File.dirname("../backup/demask")
         FileUtils.mkdir_p(dirname)
         names1.each do |file_name|
-          FileUtils.cp(file_name,dirname)
+          FileUtils.cp(file_name, dirname)
         end
         puts "-----------#{count}---"
       end
     end
   end
+
+  desc "rename files in the dir"
+  task rename: :environment do
+    dir_path = ENV["path"]
+    unless dir_path.present?
+      puts "请指定路径:  rake file:encode path=/home/crystal/xxx".red
+      next
+    end
+    begin
+      FileUtils.cd(dir_path) do
+        files = Dir.glob("*.*")
+        name_length = files.size.to_s.size
+        count = 0
+        files.each do |old_name|
+          count += 1
+          ext = old_name.split(".")[-1]
+          new_name = "#{count}".rjust(name_length, "0") + "." + ext
+          File.rename(old_name, new_name)
+          puts new_name.green
+        end
+        puts "-----------#{count}---"
+      end
+    end
+  end
+
 end

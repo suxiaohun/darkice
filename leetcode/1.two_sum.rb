@@ -9,3 +9,5 @@ def two_sum(nums, target)
     _hash[n] = i
   end
 end
+
+# 两数之和

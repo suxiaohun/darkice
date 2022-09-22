@@ -32,3 +32,5 @@ def add_two_numbers(l1, l2, extra = 0)
 
   ListNode.new(val, add_two_numbers(next1, next2, extra))
 end
+
+# 单链表相加，注意进位即可

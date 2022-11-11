@@ -1,8 +1,10 @@
-source 'https://gems.ruby-china.com'
+source 'https://rubygems.org/'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+# gem 'aws-sdk-s3', '~> 1.114'
+gem 'minio'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1', '>= 6.1.5'
 # Use mysql as the database for Active Record

@@ -1,0 +1,59 @@
+apiVersion: pingcap.com/v1alpha1
+kind: TidbCluster
+metadata:
+  name: cylon-tidb
+spec:
+  version: "v6.1.0"
+  timezone: UTC
+  configUpdateStrategy: RollingUpdate
+  imagePullPolicy: IfNotPresent
+
+  topologySpreadConstraints:
+    - topologyKey: viper.sensetime.com/node-components
+
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 2000
+    fsGroup: 2000
+
+  helper:
+    image: busybox:1.26.2
+  pvReclaimPolicy: Retain
+  enableDynamicConfiguration: true
+
+  pd:
+    baseImage: pingcap/pd
+    config: |
+      [dashboard]
+        internal-proxy = true
+        enable-telemetry = false
+    replicas: 1
+    maxFailoverCount: 0
+    requests:
+      storage: 10Gi
+    mountClusterClientSecret: true
+    storageClassName: "storageclass-local-tidb-pd"
+    service:
+      type: NodePort
+
+  tidb:
+    baseImage: pingcap/tidb
+    config: |
+      [performance]
+        tcp-keep-alive = true
+    replicas: 1
+    maxFailoverCount: 0
+    service:
+      type: NodePort
+      externalTrafficPolicy: Local
+
+  tikv:
+    baseImage: pingcap/tikv
+    config: |
+      log-level = "info"
+    replicas: 1
+    maxFailoverCount: 0
+    requests:
+      storage: 100Gi
+    mountClusterClientSecret: true
+    storageClassName: "storageclass-local-tidb-tikv"

@@ -35,14 +35,15 @@ namespace :file do
   desc "rename files in the dir"
   task rename: :environment do
     dir_path = ENV["path"]
+    name_length = ENV["len"].to_i
     unless dir_path.present?
-      puts "请指定路径:  rake file:encode path=/home/crystal/xxx".red
+      puts "请指定路径:  rake file:rename path=/home/crystal/xxx len=4".red
       next
     end
     begin
       FileUtils.cd(dir_path) do
         files = Dir.glob("*.*")
-        name_length = files.size.to_s.size
+        name_length = files.size.to_s.size if name_length == 0
         count = 0
         files.each do |old_name|
           count += 1

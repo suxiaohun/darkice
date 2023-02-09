@@ -1,0 +1,116 @@
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="fav.ico">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="menu.css">
+  <script type="text/javascript" src="menu.js"></script>
+  <script type="text/javascript" src="jQuery.min.js"></script>
+  <title></title>
+</head>
+
+<body>
+<div class="headerDiv">
+</div>
+<div style="align-content: center;">
+  <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+    <tbody>
+    <tr>
+      <td align="center">
+        <table cellpadding="3" cellspacing="0" border="0">
+          <tbody>
+          <tr>
+            <td><img src="logo.jpg" border="0"></td>
+            <td align="left" valign="middle">
+
+              <a href="/accounts"><b>
+                <font color="#777777">ACCOUNTS</font>
+              </b></a>
+            </td>
+            <td>
+              |
+            </td>
+            <td>
+              <a href="/roles"><b>
+                <font color="#aaaaaa">ROLES</font>
+              </b></a>
+            </td>
+            <td>
+              |
+            </td>
+            <td>
+              <a href="index.jsp?page=server"><b>
+                <font color="#aaaaaa">SERVER CONFIGURATION</font>
+              </b></a>
+            </td>
+            <td>
+              |
+            </td>
+            <td>
+              <a href="index.jsp?page=serverctrl"><b>
+                <font color="#aaaaaa">SERVER CONTROL</font>
+              </b></a>
+            </td>
+            <td>
+              |
+            </td>
+            <td>
+              <ul id="menu">
+                <li onmouseover="javascript:show_submenu('sub_plugins');" onmouseout="javascript:hide_submenu('sub_plugins');">
+                  <a href="index.jsp?plugin"><b><font color="#aaaaaa">▼ADDONS</font></b></a>
+                  <ul id="sub_plugins">
+                    <li><a href="index.jsp?plugin=Change Account Password Forcefully"> <b>● </b>Change Account Password
+                      Forcefully</a></li>
+                    <li><a href="index.jsp?plugin=Common"> <b>● </b>Common</a></li>
+                    <li><a href="index.jsp?plugin=GMControl"> <b>● </b>GMControl</a></li>
+                    <li><a href="index.jsp?plugin=GetGold"> <b>● </b>GetGold</a></li>
+                    <li><a href="index.jsp?plugin=GetItem"> <b>● </b>GetItem</a></li>
+                    <li><a href="index.jsp?plugin=GuildIcon"> <b>● </b>GuildIcon</a></li>
+                    <li><a href="index.jsp?plugin=IP Log"> <b>● </b>IP Log</a></li>
+                    <li><a href="index.jsp?plugin=List GM Accounts"> <b>● </b>List GM Accounts</a></li>
+                    <li><a href="index.jsp?plugin=List Online Players"> <b>● </b>List Online Players</a></li>
+                    <li><a href="index.jsp?plugin=Live Chat"> <b>● </b>Live Chat</a></li>
+                    <li><a href="index.jsp?plugin=Mask Gen"> <b>● </b>Mask Gen</a></li>
+                    <li><a href="index.jsp?plugin=Send Mail 2"> <b>● </b>Send Mail 2</a></li>
+                    <li><a href="index.jsp?plugin=Send Mail 3"> <b>● </b>Send Mail 3</a></li>
+                    <li><a href="index.jsp?plugin=SendMail"> <b>● </b>SendMail</a></li>
+                    <li><a href="index.jsp?plugin=Skill HexGen"> <b>● </b>Skill HexGen</a></li>
+                    <li><a href="index.jsp?plugin=Spouse Manager"> <b>● </b>Spouse Manager</a></li>
+                    <li>
+                      <a href="index.jsp?plugin=Top Players - Manual Refresh"> <b>● </b>Top Players - Manual Refresh</a>
+                    </li>
+                    <li><a href="index.jsp?plugin=Vote Abuse"> <b>● </b>Vote Abuse</a></li>
+                    <li style="border-bottom: 1px solid #cccccc;">
+                      <a href="http://pwadmin.codeplex.com/Thread/List.aspx">Search Plugins...</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+            <td>
+
+
+              <table cellpadding="2" cellspacing="0" border="0">
+                <tbody>
+                <tr>
+                  <td><a href="index.jsp?page=login&amp;logout=true"><img src="btn_logout.jpg" border="0"></a></td>
+
+                </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+</div>
+<div style="margin: auto;align-content: center">
+  <%= yield %>
+</div>
+</body>
+</html>

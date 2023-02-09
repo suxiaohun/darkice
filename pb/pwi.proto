@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pb;
+option go_package="/pb";
+
+
+service PwiApi {
+  rpc GetUserRoles (GetUserRolesArg) returns (GetUserRolesRes) {}
+}
+
+message GetUserRolesArg {
+  int32 userid = 1;
+  int32 type = 2;
+  string table = 3;
+  string attr = 4;
+  string key = 5;
+}
+
+message GetUserRolesRes {
+  int32 code = 1;
+  string roles = 2;
+}

@@ -1,0 +1,12 @@
+<%= form_with(model: [post,Comment.new]) do |form| %>
+<br>
+  Your comment:
+  <div>
+    <%= form.label :content, style: "display: block" %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

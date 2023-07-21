@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :tools do
+    collection do
+      get 'json'
+    end
+  end
 
   resources :posts do
     resources :comments

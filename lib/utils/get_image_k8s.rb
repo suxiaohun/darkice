@@ -1,5 +1,5 @@
-private_repo = "registry.sensetime.com"
-private_namespace = "wa_innovation/huxiaoyang"
+private_repo = "xxx"
+private_namespace = "xxx/yyy"
 
 #--------------k8s-----------------
 k8s_repo = 'registry.k8s.io'

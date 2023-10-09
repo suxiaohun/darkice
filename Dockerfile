@@ -10,5 +10,5 @@ RUN bundle install
 
 COPY ./ /darkice
 
-CMD ["rails","s"]
+CMD ["rails","s","-b","0.0.0.0"]
 

@@ -13,6 +13,7 @@ ENV MYSQL_URL="mysql.component"
 ENV MYSQL_PORT=3306
 ENV REDIS_URL="redis://:123456@redis-default.component:6379/1"
 ENV MYSQL_PASSWORD=123456
+ENV RAILS_SERVE_STATIC_FILES=true
 
 
 COPY ./ /darkice

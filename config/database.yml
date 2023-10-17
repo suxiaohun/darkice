@@ -53,10 +53,8 @@ production:
   <<: *default
   database: darkice
   username: root
-  password: <%= ENV["DARKICE_DATABASE_PASSWORD"] %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD") { 123456 } %>
   timeout: 3000
-  port: 3306
-  host: mysql.component
-#  host: 10.4.243.51
-#  port: 30306
+  host: <%= ENV.fetch("MYSQL_URL") { "10.4.243.51" } %>
+  port: <%= ENV.fetch("MYSQL_PORT") { 30306 } %>
 

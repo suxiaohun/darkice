@@ -54,3 +54,9 @@ production:
   database: darkice
   username: root
   password: <%= ENV["DARKICE_DATABASE_PASSWORD"] %>
+  timeout: 3000
+  port: 3306
+  host: mysql.component
+#  host: 10.4.243.51
+#  port: 30306
+

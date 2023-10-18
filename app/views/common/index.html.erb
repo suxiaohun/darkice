@@ -108,12 +108,6 @@
 
 <div id="container"></div>
 <div id="info"></div>
-<div id="menu">
-  <button id="table">表面</button>
-  <button id="sphere">球体</button>
-  <button id="helix">螺旋</button>
-  <button id="grid">网格</button>
-</div>
 
 <script>
 
@@ -244,6 +238,7 @@
     var objects = [];
     var targets = { table: [], sphere: [], helix: [], grid: [] };
 
+
     init();
     animate();
 
@@ -371,37 +366,16 @@
         controls.maxDistance = 6000;
         controls.addEventListener( 'change', render );
 
-        var button = document.getElementById( 'table' );
-        button.addEventListener( 'click', function ( event ) {
 
-            transform( targets.table, 2000 );
-
-        }, false );
-
-        var button = document.getElementById( 'sphere' );
-        button.addEventListener( 'click', function ( event ) {
-
-            transform( targets.sphere, 2000 );
-
-        }, false );
-
-        var button = document.getElementById( 'helix' );
-        button.addEventListener( 'click', function ( event ) {
-
-            transform( targets.helix, 2000 );
-
-        }, false );
-
-        var button = document.getElementById( 'grid' );
-        button.addEventListener( 'click', function ( event ) {
-
-            transform( targets.grid, 2000 );
-
-        }, false );
+        setInterval(function () {
+            animate()
+            let elements = [targets.table, targets.sphere, targets.helix, targets.grid];
+            let randomIndex = Math.floor(Math.random() * elements.length);
+            let randomElement = elements[randomIndex];
+            transform( randomElement, 2000 );
+        },5000);
 
         transform( targets.table, 5000 );
-
-        //
 
         window.addEventListener( 'resize', onWindowResize, false );
 

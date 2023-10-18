@@ -1,3 +1,10 @@
 <div id="<%= dom_id comment %>">
-    <%= comment.content %>-<%= time_tag comment.created_at,"data-local": "time-ago" %>
+  <div>
+    马小明-<%= time_tag comment.created_at,"data-local": "time-ago" %>
+  </div>
+  <div>
+    <%= comment.content %>
+  </div>
+
+  <hr class="dashed-hr">
 </div>

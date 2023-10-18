@@ -1,6 +1,6 @@
- :root {
-    --sans-font: -apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Nimbus Sans L",Roboto,"Noto Sans","Segoe UI",Arial,Helvetica,"Helvetica Neue",sans-serif;
-    --mono-font: Consolas,Menlo,Monaco,"Andale Mono","Ubuntu Mono",monospace;
+:root {
+    --sans-font: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif;
+    --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     --standard-border-radius: 5px;
     --bg: #fff;
     --accent-bg: #f5f7ff;
@@ -13,38 +13,65 @@
     --marked: #ffdd33;
     --disabled: #efefef;
 }
- a, a:visited {
-     color: var(--accent);
- }
+
+a, a:visited {
+    color: var(--accent);
+}
+
+.dashed-hr {
+    border: none;
+    border-top: 1px dashed #000; /* 虚线样式，可以自定义颜色、线宽等 */
+    margin: 0 auto; /* 水平居中 */
+}
 
 
-.post-container{
+.post-container {
     width: 1024px;
     margin: auto;
     /*border: 1px solid darkgrey;*/
     line-height: 25px;
 
 }
-.post-title {
+
+.post{
     display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-comment-count {
+
+}
+
+.post-title {
     max-width: 720px;
     min-width: 720px;
-    white-space: nowrap;
-    overflow: hidden; /* 隐藏溢出部分 */
-    text-overflow: ellipsis; /* 使用省略号表示溢出 */
     /*border: 1px solid green;*/
     width: 100px;
 }
 
 .post-common {
-    display: inline-block;
     width: 70px;
-    overflow: hidden;
     /*border: 1px solid rebeccapurple;*/
 }
+
 .post-date {
-    display: inline-block;
     width: 200px;
-    overflow: hidden;
     /*border: 1px solid rebeccapurple;*/
+}
+
+.post-show {
+    width: 1024px;
+    margin: auto;
+}
+
+.post-show-content {
+    clear: both;
+
+}
+
+.post-show-timestamp {
+    float: right;
+    height: 20px;
 }

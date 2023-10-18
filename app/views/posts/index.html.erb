@@ -1,14 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Posts</h1>
 
-<div id="posts">
+
   <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+    <div class="post-container">
+      <div class="post-title"><%= link_to post.title, post %></div>
+      <div class="post-common">小明</div>
+      <div class="post-date"><%= time_tag post.created_at, "data-local": "time-ago" %></div>
+    </div>
   <% end %>
-</div>
-
+<%= paginate @posts %>
 <%= link_to "New post", new_post_path %>

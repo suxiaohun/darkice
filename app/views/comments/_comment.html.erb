@@ -1,6 +1,6 @@
 <div id="<%= dom_id comment %>">
-  <div>
-    马小明-<%= time_tag comment.created_at,"data-local": "time-ago" %>
+  <div class="comment-user">
+    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="icon-sm shrink-0" height="1em" width="1em"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>马小明-<%= time_tag comment.created_at,"data-local": "time-ago" %>
   </div>
   <div>
     <%= comment.content %>

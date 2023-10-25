@@ -6,7 +6,7 @@
     <div>
       <div class="post post-comment-count"><%= post.comments.count %></div>
       <div class="post post-title"><%= link_to post.title, post %></div>
-      <div class="post post-common">小明</div>
+      <div class="post post-common"><%= post.created_by ||  "Anonymous" %></div>
       <div class="post post-date"><%= time_tag post.created_at, "data-local": "time-ago" %></div>
     </div>
   <% end %>

@@ -9,3 +9,10 @@ image:
 
 push: image
 	@docker push $(REPO)/$(PROJECT):$(TAG)
+
+
+reset:
+	@rails db:drop
+	@rails db:create
+	@rails db:migrate
+	@rails db:seed

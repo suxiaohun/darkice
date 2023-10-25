@@ -9,6 +9,8 @@ gem "rails", "~> 7.1.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem 'devise', "~> 4.9.3"
+
 gem 'kaminari'
 
 # Use mysql2 as the database for Active Record

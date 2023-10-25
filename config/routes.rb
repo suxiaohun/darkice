@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'show2',to: "posts#show2"
+  devise_for :users
+  get 'show2', to: "posts#show2"
   resources :posts do
     resources :comments
 

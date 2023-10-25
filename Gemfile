@@ -13,6 +13,9 @@ gem 'devise', "~> 4.9.3"
 
 gem 'kaminari'
 
+
+gem 'pry'
+
 # Use mysql2 as the database for Active Record
 gem "mysql2", "~> 0.5"
 

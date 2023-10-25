@@ -4,6 +4,8 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    # binding.pry
+    # current_user
     @posts = Post.all.page params[:page]
   end
 

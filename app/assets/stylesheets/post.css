@@ -29,35 +29,58 @@ a, a:visited {
     width: 1024px;
     margin: auto;
     /*border: 1px solid darkgrey;*/
-    line-height: 25px;
+    /*line-height: 25px;*/
 
 }
 
-.post{
+.post-container > div:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.post-container > div:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.post {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.post-comment-count {
 
+.post-comment-count {
+    line-height: 50px;
+    font-weight: bold;
+    font-size: large;
+    color: #bc6161;
+    padding: 0 10px 0 10px;
 }
 
 .post-title {
-    max-width: 720px;
-    min-width: 400px;
+    max-width: 100%;
+    width: 60%;
     /*border: 1px solid green;*/
-    width: 100px;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: large;
 }
 
+.post-title > a {
+    text-decoration: none;
+}
+
+.post-create{
+    width: fit-content;
+    padding-right: 10px;
+}
 .post-common {
-    width: 140px;
+    width: 20%;
     /*border: 1px solid rebeccapurple;*/
 }
 
 .post-date {
-    width: 200px;
+    width: 20%;
     /*border: 1px solid rebeccapurple;*/
 }
 
@@ -76,7 +99,7 @@ a, a:visited {
     height: 20px;
 }
 
-.comment-user{
+.comment-user {
     height: 20px;
     margin: 10px 10px 10px 0;
 }

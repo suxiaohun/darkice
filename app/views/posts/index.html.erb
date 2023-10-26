@@ -8,8 +8,20 @@
     <div>
       <div class="post post-comment-count"><%= post.comments.count %></div>
       <div class="post post-title"><%= link_to post.title, post %></div>
-      <div class="post post-common"><%= post.created_by_name || "Anonymous" %></div>
-      <div class="post post-date"><%= time_tag post.created_at, "data-local": "time-ago" %></div>
+      <div class="post post-create">
+        <span class="post-common"><%= post.created_by_name || "Anonymous" %></span><br>
+        <span class="post-date"><%= time_tag post.created_at, "data-local": "time-ago" %></span>
+      </div>
+
+      <div class="post post-create">
+        <% if post.comments.last %>
+        <span class="post-date"><%= time_tag post.comments.last.created_at, "data-local": "time-ago" %> </span><br>
+          <span class="post-common"><%= post.comments.last.created_by_name%></span>
+          <% else %>
+          <span class="post-date"><%= time_tag post.created_at, "data-local": "time-ago" %></span><br>
+          <span class="post-common"><%= post.created_by_name %>11</span>
+          <% end %>
+      </div>
     </div>
   <% end %>
   <p>

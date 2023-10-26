@@ -5,7 +5,9 @@ class CreateComments < ActiveRecord::Migration[7.0]
       t.text :content
 
       t.integer :created_by
+      t.string :created_by_name
       t.integer :updated_by
+      t.string :updated_by_name
       t.timestamps
     end
   end

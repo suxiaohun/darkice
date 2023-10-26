@@ -1,4 +1,6 @@
-<%= link_to("Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }) %>
+<% if user_signed_in? %>
+  <%= link_to("Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }) %>
+<% end %>
 
 
 <div class="post-container">
@@ -6,7 +8,7 @@
     <div>
       <div class="post post-comment-count"><%= post.comments.count %></div>
       <div class="post post-title"><%= link_to post.title, post %></div>
-      <div class="post post-common"><%= post.created_by ||  "Anonymous" %></div>
+      <div class="post post-common"><%= post.created_by_name || "Anonymous" %></div>
       <div class="post post-date"><%= time_tag post.created_at, "data-local": "time-ago" %></div>
     </div>
   <% end %>
@@ -14,7 +16,9 @@
     <%= paginate @posts %>
   </p>
   <p>
-    <%= link_to "New post", new_post_path %>
+    <% if user_signed_in? %>
+      <%= link_to "New post", new_post_path %>
+    <% end %>
   </p>
 </div>
 

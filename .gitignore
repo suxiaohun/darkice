@@ -39,6 +39,11 @@ app/assets/videos
 lib/utils/books/*
 !lib/utils/books/.keep
 
+lib/utils/pwi/configs.pck.files
+lib/utils/pwi/interfaces.pck.files
+lib/utils/pwi/*.zip
+lib/utils/pwi/*.tar
+
 Gemfile.lock
 
 Makefile

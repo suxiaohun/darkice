@@ -1,0 +1,36 @@
+<table class="common-table">
+  <tr>
+    <td>更改客户端语言/语音</td>
+    <td><pre>
+      1.关闭客户端，关闭战网
+      2.进入游戏目录：xxx/World of Warcraft
+      3.根据区服，进入对应的文件夹：_retail_/WTF
+        - 经典服 => _classic_
+        - 正式服 => _retail_
+      4.用记事本打开文件：Config.wtf
+      5.修改其中的
+        SET textLocale "zhCN"  => SET textLocale "enUS"
+        SET audioLocale "zhCN" => SET audioLocale "enUS"
+      6.直接使用游戏目录中的launcher.exe启动游戏，应该可以看到登录页面已经变为了英文，不需要登录账号，直接关闭客户端
+      7.打开战网，会自动更新
+      8.更新完毕后，使用战网登录游戏即可
+
+      注：
+        1.第6步不能直接打开战网，否则还会是默认的中文
+        2.textLocale不支持中文，你会看到玩家的中文名字都是：□□□□这种占位符，所以推荐是中文界面，英文语音
+    </pre>
+    </td>
+    <td>
+      <pre>
+        目前支持的区域和国际化配置如下，根据需要自行配置
+        "AllowedRegions": "CN;US;EU;KR",
+        "AllowedLocales":"zhCN;deDE;enGB;enUS;esMX;esES;frFR;itIT;plPL;ptBR;ruRU;koKR;zhTW"
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td>插件整合包</td>
+    <td><a href="https://github.com/suxiaohun/AddOns" target="_blank">点击查看</a></td>
+    <td>自用的插件包</td>
+  </tr>
+</table>

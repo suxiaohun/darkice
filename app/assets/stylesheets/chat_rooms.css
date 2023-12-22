@@ -1,0 +1,9 @@
+
+
+html,
+body {
+  padding: 0 0;
+  width: 1024px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}

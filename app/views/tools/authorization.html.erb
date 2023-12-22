@@ -1,0 +1,54 @@
+<style>
+    td > input {
+        min-width: 300px;
+    }
+
+    .span {
+        position: relative;
+        top: 50px;
+        color: dodgerblue;
+        font-size: 24px;
+        font-weight: bold;
+        max-width: 1024px;
+        word-break: break-all
+    }
+
+    .span1{
+        color: green;
+        resize: none;
+        width: 600px;
+        height: 200px;
+    }
+
+</style>
+
+<div style="margin: 0 auto;width: 80%">
+  <%= form_tag('/authorization', method: 'post', remote: true) do %>
+    <%= token_tag %>
+    <table>
+      <tr>
+        <td>key_uuid</td>
+        <td><%= text_field_tag :key_id, "1ef1b4c60e0f458d9772babcddbdc99d" %>*商户的key</td>
+      </tr>
+      <tr>
+        <td>key_secret</td>
+        <td><%= text_field_tag :key_secret, "cd2e12efffc849929c0f4e0f468ed0b2" %>*key对应的secret</td>
+      </tr>
+      <tr>
+        <td>timestamp</td>
+        <td><%= text_field_tag :timestamp, "1637637647343" %></td>
+      </tr>
+      <tr>
+        <td>nonce</td>
+        <td><%= text_field_tag :nonce, "cc649a785d494213aa0bfb068a29f096" %></td>
+      </tr>
+    </table>
+
+    <%= submit_tag 'generate_sign', class: 'btn btn-primary' %>
+  <% end %>
+
+  <hr>
+  <textarea id="sign_str" class="span span1"></textarea>
+  <br>
+  <div id="sign" class="span"></div>
+</div>

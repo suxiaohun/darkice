@@ -1,0 +1,103 @@
+<html lang="">
+<head>
+  <title></title></head>
+<style>
+    td{
+        /*min-width: 15%;*/
+    }
+    .lef{
+        text-align: left;
+    }
+    .rig{
+        text-align: right;
+    }
+</style>
+<body>
+<div style="margin: auto;background: gainsboro;width: 1000px;">
+  <form method="get" action="/hex">
+    <table>
+      <tr>
+        <td class="rig">等级要求: </td>
+        <td class="lef"><input type="number" value="0" name="level"></td>
+        <td class="rig">职业要求:</td>
+        <td class="lef"><input type="number" value="0" name="class"></td>
+        <td class="rig">力量要求:</td>
+        <td class="lef"><input type="number" value="0" name="strength"></td>
+      </tr>
+      <tr>
+        <td class="rig">体质要求: </td>
+        <td class="lef"><input type="number" value="0" name="vitality"></td>
+        <td class="rig">敏捷要求:</td>
+        <td class="lef"><input type="number" value="0" name="agility"></td>
+        <td class="rig">灵力要求:</td>
+        <td class="lef"><input type="number" value="0" name="energy"></td>
+      </tr>
+      <tr>
+        <td class="rig">持久度: </td>
+        <td class="lef"><input type="number" value="999" name="durability"></td>
+        <td class="rig">制造者:</td>
+        <td class="lef"><input type="text" value="GM" name="creator"></td>
+        <td class="rig">虚弱距离:</td>
+        <td class="lef"><input type="checkbox" name="enable_min_range"></td>
+      </tr>
+      <tr>
+        <td class="rig">武器类型: </td>
+        <td class="lef">
+          <select name="weapon_type">
+            <option value="axes">双斧</option>
+          </select>
+        </td>
+        <td class="rig">品阶:</td>
+        <td class="lef"><input type="number" value="17" name="grade"></td>
+        <td class="rig">武器弹药:</td>
+        <td class="lef"><input type="number" value="0" name="ammunition"></td>
+      </tr>
+      <tr>
+        <td class="rig">最小物攻: </td>
+        <td class="lef"><input type="number" value="999" name="min_phy_damage"></td>
+        <td class="rig">最大物攻:</td>
+        <td class="lef"><input type="number" value="999" name="max_phy_damage"></td>
+        <td class="rig">最小法攻:</td>
+        <td class="lef"><input type="number" value="999" name="min_mag_damage"></td>
+      </tr>
+      <tr>
+        <td class="rig">最大法攻: </td>
+        <td class="lef"><input type="number" value="999" name="max_mag_damage"></td>
+        <td class="rig">攻击速度:</td>
+        <td class="lef"><input type="number" value="5" name="atk_speed"></td>
+        <td class="rig">攻击距离:</td>
+        <td class="lef"><input type="number" value="40" name="atk_range"></td>
+      </tr>
+      <tr>
+        <td class="rig">最小攻击距离: </td>
+        <td class="lef"><input type="number" value="40" name="atk_min_range"></td>
+        <td class="rig">孔数:</td>
+        <td class="lef"><input type="number" value="2" name="hole"></td>
+        <td class="rig">xxx</td>
+        <td class="lef"><input type="number" value="40" name="xxx"></td>
+      </tr>
+      <tr><td colspan="3">附加属性：</td></tr>
+      <tr>
+        <%
+          count = 0
+          SPEC_ATTRS.each do |k, v|
+            count += 1
+            if count % 3 == 0
+        %>
+
+          <tr>
+        <% end %>
+        <td class="rig"><%= v[1] %>：</td>
+        <td class="lef">
+          <input type="checkbox" name="<%= k %>"><input type="number" value="9999" name="<%= "#{k}_val" %>">
+        </td>
+      <% end %>
+      </tr>
+    </table>
+    <input type="submit">
+
+  </form>
+</div>
+
+</body>
+</html>

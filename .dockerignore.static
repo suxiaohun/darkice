@@ -1,0 +1,4 @@
+.dockerignore
+!public/
+public/books
+public/videos

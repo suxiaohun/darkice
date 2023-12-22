@@ -1,0 +1,19 @@
+// Place all the styles related to the tools controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+html,
+body {
+  margin: 0 auto;
+}
+
+.common-table td {
+  border: 1px solid grey;
+  padding: 15px 15px;
+}
+
+.common-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}

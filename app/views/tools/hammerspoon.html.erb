@@ -1,0 +1,32 @@
+<div style="padding-top: 15px;font-size: 16px;">
+
+<pre>
+  Use hammerspoon to call MacOS api
+
+  1.Download latest release and drag to applications
+
+     https://www.hammerspoon.org/
+
+  2.Vi ~/.hammerspoon/init.lua
+
+     https://www.hammerspoon.org/docs
+
+  3.Open the application
+
+     right click the menu => console => Reload config
+
+  Notes:
+    # Hammerspoon use lua as the script language.
+    # You need use reload the init.lua file on the console when you modified it.
+
+  Examples:
+
+      hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "T", function()
+          hs.alert.show("hello")
+      end)
+
+      # When you press cmd+alt+ctrl+t, you will see the alert on the screen.
+
+
+</pre>
+</div>

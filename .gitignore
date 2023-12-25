@@ -35,3 +35,6 @@
 /config/master.key
 .idea
 Gemfile.lock
+lib/utils/pwi/wrong_ids
+lib/utils/pwi/ok_ids
+lib/utils/pwi/mobs

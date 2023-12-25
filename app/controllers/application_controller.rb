@@ -1,5 +1,3 @@
-require_relative '../../pb/face_api_pb'
-require_relative '../../pb/face_api_services_pb'
 class ApplicationController < ActionController::Base
 
   private

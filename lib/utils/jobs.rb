@@ -12,10 +12,8 @@ BM_HOST = "http://172.20.25.95:30080/components/batch-manager-default"
 
 JOB_URL = "#{BM_HOST}/v1/jobs"
 
-
-def get_jobs
-  start_date = (Time.now - 2 * TIME_THRESHOLD).strftime("%Y-%m-%dT%H:%M:%SZ")
-  jobs_url="#{JOB_URL}?catalog=inc-clustering&period.start=#{start_date}"
+def get_jobs(start_date = ((Time.now - 2 * TIME_THRESHOLD).strftime("%Y-%m-%dT%H:%M:%SZ")))
+  jobs_url = "#{JOB_URL}?catalog=inc-clustering&period.start=#{start_date}"
 
   uri = URI(jobs_url)
   res = Net::HTTP.get_response(uri)
@@ -51,21 +49,24 @@ end
 job_id = ARGV[0]
 
 jobs = get_jobs
-jobs = jobs.each {|x| x["name"]=="classification_job"}
-# id,.name,.result.status,.created_at,.finished_at
+jobs = get_jobs((Time.now - 4 * TIME_THRESHOLD).strftime("%Y-%m-%dT%H:%M:%SZ")) if jobs.count < 5
 
+# jobs = jobs.each {|x| x["name"]=="classification_job"}
+# id,.name,.result.status,.created_at,.finished_at
 
 jobs.each do |job|
   puts "#{job["id"]} #{job["name"]} #{job["result"]["status"]} #{job["created_at"]} #{job["finished_at"]}"
-  unless job_id.empty?
-    next if job["id"] != job_id
+  unless job_id.nil?
+    if job_id == job["id"]
+      puts 111
+      job_detail = get_job(job["id"])
+      puts "----------------------------------------"
+      job_detail["events"].each do |event|
+        puts "#{event["timestamp"]} => #{event["reason"]}"
+      end
+      puts "----------------------------------------"
+    end
   end
-  job_detail = get_job(job["id"])
-  puts "----------------------------------------"
-  job_detail["events"].each do |event|
-    puts "#{event["timestamp"]} => #{event["reason"]}"
-  end
-  puts "----------------------------------------"
 end
 
 

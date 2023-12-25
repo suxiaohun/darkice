@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  get 'index2', to: 'common#index2'
 
   get 'persons/index'
   get 'search/index'
@@ -78,5 +79,6 @@ Rails.application.routes.draw do
   get '/v2/pause/manifests/3.1', to: 'tools#mirror'
 
   root 'common#index'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

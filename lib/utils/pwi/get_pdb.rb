@@ -29,7 +29,7 @@ puts wrong_ids.count
 # end
 
 
-15000.times do |i|
+85000.times do |i|
   mob_id = "#{i + 1}"
   next if wrong_ids.include? "#{mob_id}"
   next if ok_ids.include? "#{mob_id}"

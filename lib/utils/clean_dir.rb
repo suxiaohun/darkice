@@ -46,6 +46,7 @@ def clean_old_dirs(path)
   Dir.chdir(path) do
     Dir.glob("*") do |dd|
       if File.directory? dd
+        next if dd == "worker"
         stat = File.stat dd
 
         # 删除两天前的无用目录
@@ -130,7 +131,8 @@ while true
           # FileUtils.rm_rf "#{spark_path}"
           puts "delete failed job---#{job["id"]}=>#{job["name"]}---dirs: spark_path=>#{spark_path}"
         end
-        if worker_path
+
+        if worker_path && job["result"]["status"] == "FINISHED"
           # FileUtils.rm_rf "#{worker_path}"
           puts "delete failed job---#{job["id"]}=>#{job["name"]}---dirs: worker_path=>#{worker_path}"
         end

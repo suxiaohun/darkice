@@ -1,7 +1,7 @@
 REDIS_CONFIG = {}
 # todo disable env
 # REDIS_CONFIG[:host] = XiaopangEnv.redis.host
-REDIS_CONFIG[:host] = "10.4.243.51"
+REDIS_CONFIG[:host] = "127.0.0.1"
 # REDIS_CONFIG[:port] = XiaopangEnv.redis.port
 REDIS_CONFIG[:port] = "6379"
 REDIS_CONFIG[:db] = Rails.env.test? ? 3 : 0

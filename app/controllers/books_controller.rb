@@ -3,6 +3,9 @@ class BooksController < ApplicationController
 
   def index
     c = Category.find_by(name: "1024")
+    if c.nil?
+      return @books=[]
+    end
     ids = Book.where.not(category_id: c.id).pluck(:id)
     @books = Book.find(ids.sample(10))
   end

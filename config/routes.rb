@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  get 'index', to: 'common#index'
   get 'index2', to: 'common#index2'
 
   get 'persons/index'

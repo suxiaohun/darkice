@@ -1,0 +1,14 @@
+<main id="site-main">
+  <div style="padding-top: 200px;text-align: center;">
+    <p style="color: red;font-size: 36px"><%= @notice %></p>
+    <%= form_tag(encode_convert_path,multipart: true) do %>
+      <%= token_tag %>
+      <%= file_field_tag 'file' %>
+      <br>
+      <br>
+      <div style="text-align: center">
+        <%= submit_tag '提交', :class => 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</main>

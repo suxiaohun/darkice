@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get 'index', to: 'common#index'
   get 'index2', to: 'common#index2'
+  get 'encode_upload', to: 'common#encode_upload'
+  post 'encode_convert', to: 'common#encode_convert'
 
   get 'persons/index'
   get 'search/index'

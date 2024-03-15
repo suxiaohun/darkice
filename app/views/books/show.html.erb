@@ -1,14 +1,14 @@
 <!--<div style="text-align: center;">-->
 <%#= link_to 'download', {:action => 'download', :id => @book.id}, :class => 'post-card-download' %>
 <!--</div>-->
-<%= form_tag('/books/goto', method: :get) do %>
+<%= form_tag('/books/goto', method: :post) do %>
   <%= hidden_field_tag :id, @book.id %>
   <%= hidden_field_tag :process %>
   <%= submit_tag "processForm", id: 'processForm', style: 'display:none' %>
 
 <% end %>
 
-<%= form_tag('/books/page_size', method: :get) do %>
+<%= form_tag('/books/page_size', method: :post) do %>
   <%= hidden_field_tag :id, @book.id %>
   <%= hidden_field_tag :page_size %>
   <%= hidden_field_tag :current_pos, 0 %>
@@ -37,3 +37,22 @@
     </article>
   </section>
 </main>
+
+
+<script type="text/javascript">
+    function change_process() {
+        const process = document.getElementById('range').value;
+        document.getElementById('rangeShow').innerHTML = process + '%';
+        document.getElementById('process').value = process;
+        document.getElementById('page_size').value = document.getElementById('credit_card').value;
+        document.getElementById('processForm').click();
+    }
+
+    function change_pagesize() {
+        document.getElementById('page_size').value = document.getElementById('credit_card').value;
+        document.getElementById('current_pos').value = document.getElementById('curr_pos').value;
+        document.getElementById('pagesizeForm').click();
+    }
+
+
+</script>

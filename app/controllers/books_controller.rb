@@ -70,6 +70,9 @@ class BooksController < ApplicationController
       @data[:next_pos] = io.pos
     end
     @data[:rate] = range_rate(@data[:curr_pos])
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def goto
@@ -89,6 +92,9 @@ class BooksController < ApplicationController
       @data[:next_pos] = io.pos
     end
     save_reading_history
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def next

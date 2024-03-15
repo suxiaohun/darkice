@@ -63,8 +63,8 @@ Rails.application.routes.draw do
   match 'books/auth', to: 'books#auth', :via => [:get, :post]
   post 'books/category/:id', to: 'books#category'
   post 'books/next/:next_pos/:id', to: 'books#next'
-  get 'books/goto', to: 'books#goto'
-  get 'books/page_size', to: 'books#page_size'
+  post 'books/goto', to: 'books#goto'
+  post 'books/page_size', to: 'books#page_size'
   get 'books/es', to: 'books#es'
   get 'books/es_search', to: 'books#es_search'
 

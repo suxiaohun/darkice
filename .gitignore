@@ -39,4 +39,6 @@ lib/utils/pwi/wrong_ids
 lib/utils/pwi/ok_ids
 lib/utils/pwi/mobs
 lib/utils/pwi/mobs2
+lib/utils/books
 lib/utils/pwi/configs.pck.files
+public/books

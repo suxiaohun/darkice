@@ -6,17 +6,17 @@
   <%= csp_meta_tag %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <%= stylesheet_link_tag 'books', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_importmap_tags %>
 </head>
 
 <body>
 <nav id="main-menu">
   <ul>
-    <li>
-      <%= link_to '首页', books_path %>
-    </li>
     <% category_list.each do |x| %>
       <li>
-        <%= link_to x.name, { action: 'category', :id => x.id }, remote: true %>
+        <%= turbo_frame_tag x do  %>
+        <%= link_to x.name, { action: 'category', :id => x.id },data: {turbo_method: :post,turbo_frame: 'books_list'}%>
+        <% end %>
       </li>
     <% end %>
     <!--      <li>-->
@@ -37,10 +37,3 @@
 <%= yield %>
 </body>
 </html>
-<script>
-    $(function () {
-        document.getElementById("history-btn").addEventListener("click", function () {
-            $("#history-div").toggle()
-        })
-    })
-</script>

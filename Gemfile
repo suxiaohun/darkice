@@ -11,6 +11,8 @@ gem "sprockets-rails"
 
 gem 'devise', "~> 4.9.3"
 
+gem 'chinese_pinyin', '~> 1.1'
+
 gem 'kaminari'
 
 gem 'pry'

@@ -1,14 +1,14 @@
 <!--<div style="text-align: center;">-->
 <%#= link_to 'download', {:action => 'download', :id => @book.id}, :class => 'post-card-download' %>
 <!--</div>-->
-<%= form_tag('/books/goto', method: :get, remote: true) do %>
+<%= form_tag('/books/goto', method: :get) do %>
   <%= hidden_field_tag :id, @book.id %>
   <%= hidden_field_tag :process %>
   <%= submit_tag "processForm", id: 'processForm', style: 'display:none' %>
 
 <% end %>
 
-<%= form_tag('/books/page_size', method: :get, remote: true) do %>
+<%= form_tag('/books/page_size', method: :get) do %>
   <%= hidden_field_tag :id, @book.id %>
   <%= hidden_field_tag :page_size %>
   <%= hidden_field_tag :current_pos, 0 %>
@@ -28,28 +28,12 @@
     </article>
     <article>
       <section class="post-content markdown-body" id="book-section">
-        <%= render partial: 'content', locals: { data: @data } %>
+
+        <div id="contentDiv">
+          <%= render partial: 'content', locals: { data: @data } %>
+        </div>
+
       </section>
     </article>
   </section>
 </main>
-
-
-
-
-<script type="text/javascript">
-    function change_process() {
-        var process = $("#range").val();
-        document.getElementById('rangeShow').innerHTML = process + '%';
-        $("#process").val(process);
-        $("#page_size").val($("#credit_card").val());
-        $("#processForm").click();
-    }
-
-    function change_pagesize() {
-        $("#page_size").val($("#credit_card").val());
-        $("#current_pos").val($("#curr_pos").val());
-        $("#pagesizeForm").click();
-    }
-
-</script>

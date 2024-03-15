@@ -1,32 +1,37 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :page_size, :next, :goto, :edit, :update, :destroy]
+  layout 'books'
 
   def index
     c = Category.find_by(name: "1024")
     if c.nil?
-      return @books=[]
+      return @books = []
     end
     ids = Book.where.not(category_id: c.id).pluck(:id)
     @books = Book.find(ids.sample(10))
   end
 
   def category
-    if params[:id] == 'all'
-      @books = Book.includes(:author).all
-    else
-      c = Category.find_by(id: params[:id])
-      if c && c.name == "1024" && cookies[:auth_code] != BOOK_AUTH_CODE
-        redirect_to action: "auth"
-      end
       @books = Book.includes(:author).where(category_id: params[:id])
-    end
+      @category = Category.find(params[:id])
+      respond_to do |format|
+        format.turbo_stream
+      end
   end
 
   def auth
     if request.post?
+      @check=false
+      @notice="invalid password"
       if params[:auth_code] == BOOK_AUTH_CODE
         cookies.permanent[:auth_code] = BOOK_AUTH_CODE
-        redirect_to action: "index"
+        id = Category.find_by_name("1024").id
+        @books = Book.includes(:author).where(category_id: id)
+        @check=true
+        @notice=""
+      end
+      respond_to do |format|
+        format.turbo_stream
       end
     end
   end
@@ -98,6 +103,9 @@ class BooksController < ApplicationController
     end
     @data[:rate] = range_rate(@data[:curr_pos])
     save_reading_history
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   # GET /books/new
@@ -151,7 +159,7 @@ class BooksController < ApplicationController
 
   def es
     @books = Book.all.page(params[:page] || 1)
-    #render layout: 'es'
+    # render layout: 'es'
   end
 
   def es_search

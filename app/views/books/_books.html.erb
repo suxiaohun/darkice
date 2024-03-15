@@ -1,0 +1,29 @@
+<section id="post-feed">
+<% @books.each do |book| %>
+  <article class="post-card">
+    <h2 class="post-card-title">
+      <%= link_to book.display_name, book %>
+    </h2>
+    <div class="post-card-info">
+      <span class="date"><%= book.author ? book.author.name + '-' : nil %><%= book.tag %></span>
+      <span class="comments">
+
+      </span>
+    </div>
+
+    <div class="post-card-excerpt">
+      <h4><%= book.display_name %></h4>
+      <ul>
+        <li><%= book.pre_content %></li>
+      </ul>
+    </div>
+
+    <% if book.pre_content == '......' %>
+      <span class="post-card-error">书籍丢失，联系管理员.</span>
+    <% else %>
+      <%= link_to 'Read more', book, data: {class: 'post-card-readmore',turbo_frame: '_top' }%>
+    <% end %>
+
+  </article>
+<% end %>
+</section>

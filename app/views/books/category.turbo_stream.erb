@@ -1,0 +1,6 @@
+
+<% if @category.name=='1024' && cookies[:auth_code] != BOOK_AUTH_CODE %>
+  <%= turbo_stream.update "site-main", partial: "auth" %>
+<% else %>
+  <%= turbo_stream.update "site-main", partial: "books" %>
+<% end %>

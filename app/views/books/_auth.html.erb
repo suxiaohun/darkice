@@ -30,9 +30,9 @@
 
 
 <main id="site-main">
-  <div style="padding-top: 200px;text-align: center;">
-
-    <%= form_tag('/books/auth', method: :post, remote: true) do %>
+   <div style="padding-top: 200px;text-align: center;">
+     <p style="color: red;font-size: 36px"><%= @notice %></p>
+     <%= form_tag('/books/auth', method: :post) do %>
       <%= token_tag %>
       <%= text_field_tag 'auth_code', nil, required: true, :placeholder => '请输入验证码', :class => 'text_tag', required: true %>
       <br>
@@ -40,13 +40,9 @@
       <div style="text-align: center">
         <%= submit_tag '提交', :class => 'btn btn-primary' %>
       </div>
-
     <% end %>
-
-
   </div>
-
-</main>
+ </main>
 
 
 

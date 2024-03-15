@@ -1,0 +1,6 @@
+<% if @check %>
+  <%= turbo_stream.update "site-main", partial: "books" %>
+<% else %>
+  <%= turbo_stream.update "site-main", partial: "auth" %>
+<% end %>
+

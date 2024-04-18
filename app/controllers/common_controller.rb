@@ -33,7 +33,7 @@ class CommonController < ApplicationController
 
 
     unless content.force_encoding('UTF-8').valid_encoding?
-      content.encode!("utf-8", 'GBK') rescue raise "unsupported encode, check the book"
+      content.encode!("utf-8", 'GB18030') rescue raise "unsupported encode, check the book"
     end
 
 

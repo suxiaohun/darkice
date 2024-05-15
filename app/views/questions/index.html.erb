@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Questions</h1>
+
+
+<div>
+  <span>当前共有公基题<%= @questions.count %>个</span>
+</div>
+
+<div>
+  <%=  link_to "顺序练题", controller: "questions", action: "run_in_order" %><br>
+  <%=  link_to "随机练题", controller: "questions", action: "run_in_random" %>
+</div>
+
+
+
+<%= link_to "New question", new_question_path %>

@@ -1,0 +1,48 @@
+<p style="color: green"><%= notice %></p>
+
+<% if @question.nil? %>
+  <div>
+    <span>没有更多题了！</span>
+    <%= link_to "重新练习", controller: "questions", action: "refresh_ids" %>
+  </div>
+<% else %>
+  <div>
+    <%= hidden_field_tag :aw, @question.answer %>
+    <p>
+      <%= @question.title %>
+    </p>
+
+    <p>
+      <%= simple_format @question.options %>
+    </p>
+    <p>
+      <% answer_options.each do |ap| %>
+        <button class="qa-button" value="<%= ap %>"><%= ap %></button>
+      <% end %>
+    </p>
+  </div>
+<% end %>
+<script>
+    var buttons = document.querySelectorAll('.qa-button');
+    buttons.forEach(function (button) {
+        button.removeEventListener('click', clickHandler)
+    })
+    buttons.forEach(function (button) {
+        button.addEventListener('click', clickHandler)
+    })
+
+    function clickHandler() {
+        let aw = document.getElementById("aw").value;
+        if (this.value === aw) {
+            this.style.backgroundColor = 'green'
+            setTimeout(function () {
+                location.reload()
+            }, 500)
+        } else {
+            this.style.backgroundColor = 'red'
+        }
+    }
+
+</script>
+
+

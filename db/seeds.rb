@@ -23,3 +23,4 @@ Post.create([
               { title: "Working with JavaScript in Rails", created_by_name: user.name, updated_by_name: user.name }
             ])
 
+

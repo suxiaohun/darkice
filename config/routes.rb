@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'questions/order',to: "questions#run_in_order"
+  get 'questions/random',to: "questions#run_in_random"
+  get 'questions/refresh_ids',to: "questions#refresh_ids"
+
+  resources :questions
+
+
+
   devise_for :users
   get 'show2', to: "posts#show2"
   resources :posts do

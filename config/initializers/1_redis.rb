@@ -12,3 +12,4 @@ RATE_REDIS = Redis::Namespace.new(:rate, redis: redis)
 YYS_REDIS = Redis::Namespace.new(:yys, redis: redis)
 
 BOOK_REDIS = Redis::Namespace.new(:book, redis: redis)
+QUESTION_REDIS = Redis::Namespace.new(:question, redis: redis)

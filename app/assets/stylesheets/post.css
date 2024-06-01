@@ -25,13 +25,13 @@ a, a:visited {
 }
 
 
-.post-container {
-    width: 1024px;
-    margin: auto;
-    /*border: 1px solid darkgrey;*/
-    /*line-height: 25px;*/
+/*.post-container {*/
+/*    width: 1024px;*/
+/*    margin: auto;*/
+/*    !*border: 1px solid darkgrey;*!*/
+/*    !*line-height: 25px;*!*/
 
-}
+/*}*/
 
 .post-container > div:nth-child(even) {
     background-color: #f2f2f2;

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'index2', to: 'common#index2'
   get 'encode_upload', to: 'common#encode_upload'
   post 'encode_convert', to: 'common#encode_convert'
+  get 'chatgpt', to: 'common#chatgpt'
 
   get 'persons/index'
   get 'search/index'

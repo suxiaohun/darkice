@@ -1,5 +1,4 @@
 class CommonController < ApplicationController
-  layout 'home'
 
   include XiuxianInfo
 
@@ -7,6 +6,10 @@ class CommonController < ApplicationController
 
   end
 
+
+  def chatgpt
+
+  end
 
   def test
 

@@ -3,12 +3,12 @@ html, body {
 }
 
 body {
-
+  display: grid;
+  place-items: center;
 }
 
-body > div:first-child {
-  width: 75%;
-  margin: 0 auto;
+.centered-div {
+  width: 80%;
 }
 
 .center {

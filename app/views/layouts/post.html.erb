@@ -9,13 +9,19 @@
     <%#= stylesheet_link_tag 'simple.min' %>
     <%= stylesheet_link_tag 'post' %>
     <%= stylesheet_link_tag 'actiontext' %>
+    <%= stylesheet_link_tag 'common' %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="centered-div">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <% if user_signed_in? %>
+      <%= link_to("Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }) %>
+    <% end %>
+    <%= yield %>
+  </div>
 
-  <%= yield %>
   </body>
 </html>

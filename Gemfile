@@ -11,6 +11,8 @@ gem "sprockets-rails"
 
 gem 'devise', "~> 4.9.3"
 
+gem 'ruby-openai', '~> 7.0', '>= 7.0.1'
+
 gem 'chinese_pinyin', '~> 1.1'
 
 gem 'kaminari'

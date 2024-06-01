@@ -2,13 +2,30 @@ class CommonController < ApplicationController
 
   include XiuxianInfo
 
+  skip_before_action :verify_authenticity_token, only: [:chatgpt]
+
   def sign_out
 
   end
 
 
   def chatgpt
-
+    if request.post?
+      api_key = "xxx"
+      client = OpenAI::Client.new(
+        access_token: api_key,
+        log_errors: true # Highly recommended in development, so you can see what errors OpenAI is returning. Not recommended in production.
+      )
+      response = client.chat(
+        parameters: {
+          model: "gpt-3.5-turbo", # Required.
+          messages: [{ role: "user", content: "Hello!"}], # Required.
+          temperature: 0.7,
+        })
+      puts response.dig("choices", 0, "message", "content")
+      # => "Hello! How may I assist you today?"
+      puts response
+    end
   end
 
   def test

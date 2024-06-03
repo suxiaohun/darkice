@@ -5,7 +5,7 @@
 </style>
 
 <div style="position: relative;top: 100px;">
-  <%= form_tag('/sign', method: 'post', remote: true) do %>
+  <%= form_tag('/sign', {method: 'post',local: false}) do %>
     <%= token_tag %>
     <table>
       <% 5.times do |i| %>

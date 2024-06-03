@@ -116,6 +116,9 @@ class ToolsController < ApplicationController
       else
         @sign = 'unsupported hex type'
       end
+      respond_to do |format|
+        format.turbo_stream
+      end
     end
   end
 

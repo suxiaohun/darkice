@@ -15,11 +15,11 @@
     <%= file_field_tag :img %>
   </div>
 
-  <div style="text-align: center;margin: 10px">
-    <button type="submit" class="btn btn-success">图片转base64</button>
-
-  </div>
+  <br>
+    <div class="center">
+      <button type="submit" >图片转base64</button>
+    </div>
 <% end %>
 
-<%= text_area_tag :base64_data, nil, placeholder: 'base64 code' %>
+<%= text_area_tag :base64_data, nil, placeholder: 'base64 code',cols: 100 %>
 

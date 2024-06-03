@@ -39,7 +39,7 @@ label {
 
 
 textarea,
-select,
+select,button,
 input {
     font-size: inherit;
     font-family: inherit;

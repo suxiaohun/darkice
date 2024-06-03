@@ -13,7 +13,9 @@ class ToolsController < ApplicationController
 
   def json_format; end
 
-  def screen; end
+  def screen
+    render layout: false
+  end
 
   def colors; end
 

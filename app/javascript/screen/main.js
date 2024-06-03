@@ -113,9 +113,11 @@ $(document).ready(function () {
     });
 
     $("#quanping_tuichu").click(function () {
+        event.preventDefault()
         quanping_tuichu()
     });
     $("#quanping_xianshi").click(function () {
+        event.preventDefault()
         quanping_xianshi()
     });
     $("#jieshu_ceshi").click(function () {

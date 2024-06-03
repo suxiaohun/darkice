@@ -363,13 +363,16 @@
       <%= image_tag image_path('screen/grey-gradient.png') %></li>
     <li data-title="饱和度" data-desc="用于测试屏幕的色彩饱和度，颜色过渡平滑的显示设备更佳。" class="slide test" id="test-saturation">
       <%= image_tag image_path('screen/saturation.png') %></li>
-    <li data-title="测试结束" data-desc="如在使用的过程中遇到问题，请联系我。谢谢！(请按Esc键退出)" class="slide" id="test-last">测试结束，请按Esc键退出。</li>
+    <li data-title="测试结束" data-desc="请按Esc键退出" class="slide" id="test-last">测试结束，请按Esc键退出。</li>
   </ul>
   <div id="control" class="control_hide">
     <div class="panel top">
       <span class="title"></span>
       <span class="description"></span>
-      <span class="quanping"><a href="#" id="quanping_xianshi">全屏显示</a><a href="#" id="quanping_tuichu" style="display:none;">退出全屏</a><a href="#" id="jieshu_ceshi">结束测试</a></span>
+      <span class="quanping">
+        <a href="#" id="quanping_xianshi">全屏显示</a>
+        <a href="#" id="quanping_tuichu" style="display:none;">退出全屏</a>
+        <a href="#welcome" id="jieshu_ceshi">结束测试</a></span>
     </div>
     <div class="panel bottom">
       <div class="wrapper" id="control_buttons"></div>
@@ -383,5 +386,8 @@
 </body>
 
 <%= stylesheet_link_tag 'screen', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag "jQuery/jQuery.min" %>
+<%= javascript_include_tag "screen/data" %>
+<%= javascript_include_tag "screen/main" %>
 
 

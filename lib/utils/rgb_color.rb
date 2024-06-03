@@ -21,6 +21,7 @@ class RgbColor
       fav_colors = %w(
                   #FF8C00 #DB7093 #DB7093 #D2B48C #EEE8AA #F5DEB3 #EE82EE
                   #00FA9A #FFD700 #DAA520 #ADFF2F #5F9EA0 #98FB98 #FFFFE0
+                  #FFFFE0 #FFFACD #ADD8E6 #F8F8FF #D8BFD8 #FFC0CB #E1FFFF
                )
       fav_colors[rand(fav_colors.length)]
     end

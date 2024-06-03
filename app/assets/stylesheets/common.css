@@ -1,82 +1,19 @@
-html, body {
-  margin: 0 auto;
-}
-
-body {
-  display: grid;
-  place-items: center;
-}
-
-.centered-div {
-  width: 80%;
-}
-
-.center {
-  text-align: center;
-}
-
-.field_with_errors {
-  display: inline-block;
-}
-
-label {
-  display: inline-block;
-}
-
-.common-label {
-  min-width: 150px;
-  text-align: left;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--text);
-  background-color: var(--bg);
-  box-shadow: none;
-  max-width: 100%;
-  display: inline-block;
-}
-
-
-textarea,
-select,
-input {
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--text);
-  background-color: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--standard-border-radius);
-  box-shadow: none;
-  max-width: 100%;
-  display: inline-block;
-}
-
-
-:root {
-  --sans-font: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif;
-  --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  --standard-border-radius: 5px;
-  --bg: #fff;
-  --accent-bg: #f5f7ff;
-  --text: #212121;
-  --text-light: #585858;
-  --border: #898EA4;
-  --accent: #0d47a1;
-  --code: #d81b60;
-  --preformatted: #444;
-  --marked: #ffdd33;
-  --disabled: #efefef;
-}
-
 a, a:visited {
-  color: var(--accent);
+  color: black;
 }
 
-.dashed-hr {
-  border: none;
-  border-top: 1px dashed #000; /* 虚线样式，可以自定义颜色、线宽等 */
-  margin: 0 auto; /* 水平居中 */
+.nav-block {
+  width: 195px;
+  height: 90px;
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 90px;
+  color: black;
+  border-bottom: 5px solid whitesmoke;
 }
+
+

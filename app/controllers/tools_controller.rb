@@ -3,7 +3,9 @@ class ToolsController < ApplicationController
 
   def hammerspoon; end
 
-  def wow; end
+  def wow
+
+  end
 
   def base64_to_img; end
 

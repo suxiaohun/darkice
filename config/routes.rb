@@ -87,7 +87,7 @@ Rails.application.routes.draw do
   get 'unicode', to: 'tools#unicode'
   get 'json_format', to: 'tools#json_format'
   get 'mobile_area', to: 'tools#mobile_area'
-  get 'get_mobile_area', to: 'tools#get_mobile_area'
+  post 'get_mobile_area', to: 'tools#get_mobile_area'
   post 'comment_save', to: 'tools#comment_save'
   get '/v2/pause/manifests/3.1', to: 'tools#mirror'
 

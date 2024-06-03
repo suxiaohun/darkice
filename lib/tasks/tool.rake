@@ -39,6 +39,26 @@ namespace :tool do
     PhoneInfo.delete_all
 
     count = 0
+    objs = []
+    thread = Thread.new do
+      loop do
+        obj = objs.shift
+        if obj.nil?
+          sleep 0.5
+          obj = objs.shift
+          if obj.nil?
+            sleep 0.5
+            obj = objs.shift
+            if obj.nil?
+              puts "----error---"
+              return
+            end
+          end
+        end
+        obj.save!
+        puts obj.id
+      end
+    end
     File.open("#{Rails.root.to_s}/lib/utils/files/phone_info.txt").each_line do |line|
       count += 1
       _arr = line.split
@@ -48,9 +68,10 @@ namespace :tool do
       phone_info.province_code = std_provinces_hash.key _arr[1]
       phone_info.city_name = _arr[2]
       phone_info.mobile_area = "#{_arr[1]} #{_arr[2]}"
-      phone_info.save!
+      objs << phone_info
       puts "....#{count}....#{_arr}"
     end
+    thread.join
 
   end
 

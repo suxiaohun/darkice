@@ -189,7 +189,9 @@ class ToolsController < ApplicationController
     else
       @mobile_area = '至少输入7位数字'
     end
-    puts "#{@mobile_number} #{@mobile_area}"
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def comment_save

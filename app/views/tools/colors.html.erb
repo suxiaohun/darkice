@@ -1,5 +1,5 @@
 
-<table style="border-collapse: collapse" bordercolor="#d9d9d9" cellspacing="0" cellpadding="8" width="100%" bgcolor="#fcfcfc" border="1">
+<table style="border-collapse: collapse" bordercolor="#d9d9d9" cellspacing="0" cellpadding="8" width="80%" bgcolor="#fcfcfc" border="1">
   <tbody>
   <tr>
     <td>
@@ -43,7 +43,7 @@
 <br>
 <br>
 
-<% RgbColor.colors.each do |color| %>
+<% RgbColor.colors.each_with_index do |color,index| %>
 
   <div style="background: <%= color[1] %>;width: 198px;height: 90px;display: inline-block">
     <%= color[0] %><br>
@@ -51,6 +51,11 @@
     <%= color[1] %><br>
     <%= color[2] %>
   </div>
+  <%  if (index+1)%7==0 %>
+    <br>
+  <% end %>
+
+
 
 <% end %>
 

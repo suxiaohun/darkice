@@ -55,6 +55,7 @@ namespace :book do
         book.category = Category.find_or_create_by!(name: category)
         book.tag = v[:tag]
         book.path = origin_path + '/' + book.name + '.txt'
+        book.total_lines = FileHelper.total_lines(book.path)
         book.save!
         puts "....create book: #{v[:name]}".green
       end

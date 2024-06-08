@@ -1,0 +1,2 @@
+class FileIndex < ApplicationRecord
+end

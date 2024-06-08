@@ -12,6 +12,8 @@ module Darkice
     config.load_defaults 7.1
 
     config.autoload_paths << "lib/utils"
+
+    config.active_job.queue_adapter = :sidekiq
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

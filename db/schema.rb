@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_27_000055) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_08_022213) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_000055) do
     t.text "pre_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_lines", default: 0
   end
 
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
@@ -93,6 +94,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_000055) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "file_indices", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "file_id"
+    t.integer "lineno"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["file_id", "lineno"], name: "index_file_indices_on_file_id_and_lineno"
   end
 
   create_table "phone_infos", charset: "utf8mb4", force: :cascade do |t|

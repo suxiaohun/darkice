@@ -84,7 +84,9 @@ class BooksController < ApplicationController
     @data = {}
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
-      io.pos = book_total_pos * process / 100
+      curr_lineno = (@book.total_lines * process / 100).round
+      pos = FileHelper.goto(@book, curr_lineno,get_page_size )
+      io.pos = (@book.total_lines * process / 100).round
       cookies.permanent[book_reading_pos_key] = io.pos
       @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
@@ -102,6 +104,23 @@ class BooksController < ApplicationController
     @data[:id] = params[:id]
     File.open(@book.path) do |io|
       io.pos = (params[:next_pos].to_i || 0)
+      cookies.permanent[book_reading_pos_key] = io.pos
+      @data[:curr_pos] = io.pos
+      @data[:lines] = io.first(get_page_size)
+      @data[:next_pos] = io.pos
+    end
+    @data[:rate] = range_rate(@data[:curr_pos])
+    save_reading_history
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def prev
+    @data = {}
+    @data[:id] = params[:id]
+    File.open(@book.path) do |io|
+      io.pos = (params[:prev_pos].to_i || 0)
       cookies.permanent[book_reading_pos_key] = io.pos
       @data[:curr_pos] = io.pos
       @data[:lines] = io.first(get_page_size)
@@ -238,4 +257,10 @@ class BooksController < ApplicationController
     _h.shift if _h.size > 5
     cookies.permanent[:reading_history] = _h.to_json
   end
+
+
+  def calc_position(page_num)
+
+  end
+
 end

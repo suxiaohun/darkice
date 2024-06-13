@@ -1,8 +1,7 @@
-- 需要一个轻量级的adapter
-  - 用go实现server端
-  - grpc协议调用
-  - server端使用goroutine来处理对应逻辑
-    - 使用routine池
+- need a lite weight mq
+  - use golang and goroutine
+  - grpc proto
+  - kafka may be better，but too heavy
 - 人脸相关的业务接口
   - 有个前提是需要一张t4卡，或者1066卡
   - 通过grpc调用引擎层

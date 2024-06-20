@@ -8,7 +8,15 @@
   <%= form_tag('/sign', {method: 'post',local: false}) do %>
     <%= token_tag %>
     <table>
-      <% 5.times do |i| %>
+      <tr>
+        <td><%= text_field_tag 'keys[]', "appid", placeholder: 'key' %></td>
+        <td class="value"><%= text_field_tag 'values[]', "wms", placeholder: 'values' %></td>
+      </tr>
+      <tr>
+        <td><%= text_field_tag 'keys[]', "timestamp", placeholder: 'key' %></td>
+        <td class="value"><%= text_field_tag 'values[]', Time.now.to_i, placeholder: 'values' %></td>
+      </tr>
+      <% 3.times do |i| %>
         <tr>
           <td><%= text_field_tag 'keys[]', nil, placeholder: 'key' %></td>
           <td class="value"><%= text_field_tag 'values[]', nil, placeholder: 'values' %></td>

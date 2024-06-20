@@ -19,6 +19,7 @@ gem 'kaminari'
 
 gem 'pry'
 
+gem 'local_time'
 # Use mysql2 as the database for Active Record
 gem 'mysql2', '~> 0.5.5'
 

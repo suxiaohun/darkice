@@ -11,7 +11,6 @@ gem "sprockets-rails"
 
 gem 'devise', "~> 4.9.3"
 
-gem 'ruby-openai', '~> 7.0', '>= 7.0.1'
 
 gem 'chinese_pinyin', '~> 1.1'
 
@@ -19,7 +18,6 @@ gem 'kaminari'
 
 gem 'pry'
 
-gem 'local_time'
 # Use mysql2 as the database for Active Record
 gem 'mysql2', '~> 0.5.5'
 

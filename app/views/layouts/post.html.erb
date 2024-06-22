@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
   <head>
     <title><%= t('web_title') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,17 +12,23 @@
     <%= stylesheet_link_tag 'actiontext' %>
     <%= stylesheet_link_tag 'common' %>
     <%= javascript_importmap_tags %>
+    <script type="module">
+        import LocalTime from "local-time"
+
+        console.log(222)
+        LocalTime.config.locale = "zh"
+        LocalTime.run()
+
+    </script>
   </head>
 
   <body>
-  <div class="centered-div">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
       <%= link_to(t('devise.sessions.log_out'), destroy_user_session_path, method: :delete, data: { turbo_method: :delete }) %>
     <% end %>
     <%= yield %>
-  </div>
 
   </body>
 </html>

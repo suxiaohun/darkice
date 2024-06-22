@@ -1,35 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <title>Neo</title>
-  <style>
-      html, body {
-          height: 100%;
-      }
 
-      body {
-          background-color: #000000;
-          margin: 0;
-          font-family: Helvetica, sans-serif;;
-          overflow: hidden;
-      }
-
+<style>
+        #container{
+            background: black;
+            width: 100%;
+            height: 100%;
+        }
       a {
           color: #ffffff;
-      }
-
-      #info {
-          position: absolute;
-          width: 100%;
-          color: #ffffff;
-          padding: 5px;
-          font-family: Monospace;
-          font-size: 13px;
-          font-weight: bold;
-          text-align: center;
-          z-index: 1;
       }
 
       #menu {
@@ -98,8 +75,6 @@
           background-color: rgba(0,255,255,0.75);
       }
   </style>
-</head>
-<body>
 
 <%= javascript_include_tag 'three.min.js' %>
 <%= javascript_include_tag 'tween.min.js' %>
@@ -107,7 +82,6 @@
 <%= javascript_include_tag 'CSS3DRenderer.js' %>
 
 <div id="container"></div>
-<div id="info"></div>
 
 <script>
 
@@ -355,7 +329,7 @@
 
         renderer = new THREE.CSS3DRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
-        renderer.domElement.style.position = 'absolute';
+        // renderer.domElement.style.position = 'absolute';
         document.getElementById( 'container' ).appendChild( renderer.domElement );
 
         //
@@ -437,5 +411,3 @@
     }
 
 </script>
-</body>
-</html>

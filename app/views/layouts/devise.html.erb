@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'global' %>
     <%= stylesheet_link_tag 'common' %>
     <%= stylesheet_link_tag 'devise' %>
   </head>
 
   <body>
-  <div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+  <div class="centered-div">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
   </div>
+
 
   </body>
 </html>

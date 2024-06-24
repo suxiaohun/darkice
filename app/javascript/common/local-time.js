@@ -276,7 +276,6 @@ var s = {};
                             case 4:
                             case 5:
                             case 6:
-                                return u((this || r).date, "%A");
                             default:
                                 return ""
                         }

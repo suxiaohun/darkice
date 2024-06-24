@@ -91,7 +91,7 @@ class BooksController < ApplicationController
       @data[:end_pos] = @book.total_size
     else
       start_pos = (@book.total_size * process / 100).round
-      lines,end_pos = get_lines(start_pos)
+      lines,end_pos = get_lines(start_pos,1)
       @data[:start_pos] = start_pos
       @data[:end_pos] = end_pos
       @data[:neof] = true
@@ -269,14 +269,14 @@ class BooksController < ApplicationController
     cookies.permanent[:reading_history] = _h.to_json
   end
 
-  def get_lines(start_pos)
+  def get_lines(start_pos,extra=0)
     num_lines = get_page_size
     lines = []
     end_pos = start_pos
     File.open(@book.path, "r") do |io|
       io.pos = start_pos
-      lines = io.first(num_lines + 1)
-      lines.shift
+      lines = io.first(num_lines + extra)
+      lines.shift if lines.size > num_lines
       end_pos = io.pos
     end
     return lines,end_pos
@@ -298,6 +298,7 @@ class BooksController < ApplicationController
         out_string = "".force_encoding("UTF-8")
         io.read(maxlen, out_string)
         new_lines = out_string.lines
+        puts new_lines
         if new_lines.size > num_lines
           puts "break lines; #{new_lines.size}"
           lines = new_lines[-num_lines..-1]

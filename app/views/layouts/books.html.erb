@@ -8,7 +8,6 @@
   <%= stylesheet_link_tag 'books', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_importmap_tags %>
 </head>
-
 <body>
 <nav id="main-menu">
   <ul>
@@ -35,5 +34,6 @@
 
 </div>
 <%= yield %>
+<%= javascript_import_module_tag "books" %>
 </body>
 </html>

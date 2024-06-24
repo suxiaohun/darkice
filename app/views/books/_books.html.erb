@@ -21,7 +21,7 @@
     <% if book.pre_content == '......' %>
       <span class="post-card-error">书籍丢失，联系管理员.</span>
     <% else %>
-      <%= link_to '阅读更多', book, data: {class: 'post-card-readmore',turbo_frame: '_top' }%>
+      <%= link_to '阅读更多', book, {class: 'post-card-readmore',turbo_frame: '_top' }%>
     <% end %>
 
   </article>

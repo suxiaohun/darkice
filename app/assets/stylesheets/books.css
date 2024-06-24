@@ -1035,4 +1035,5 @@ footer > .copyright {
   border: 1px solid green;
   padding: 2px 2px;
   cursor: pointer;
+  color: green;
 }

@@ -1,5 +1,10 @@
 
 <div style="width: 80%">
+  <p>
+    <% if user_signed_in? %>
+      <%= link_to t('action.new'), new_post_path %>
+    <% end %>
+  </p>
   <% @posts.each_with_index do |post,i| %>
     <div class="post-row">
       <div class="post post-comment-count"><%= post.comments.count %></div>
@@ -22,11 +27,6 @@
   <% end %>
   <p>
     <%= paginate @posts %>
-  </p>
-  <p>
-    <% if user_signed_in? %>
-      <%= link_to "New post", new_post_path %>
-    <% end %>
   </p>
 </div>
 

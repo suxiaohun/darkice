@@ -41,3 +41,16 @@ en:
     forgot_password: "Forgot your password?"
     did_not_receive_confirm: "Didn't receive confirmation instructions?"
     did_not_receive_unlock: "Didn't receive unlock instructions?"
+  action:
+    new: "New"
+    edit: "Edit"
+    back: "Back"
+    show: "Show"
+    delete: "Delete"
+  helpers:
+    submit:
+      create: "Create a %{model}"
+      update: "Confirm changes to %{model}"
+  post:
+    title: "Title"
+    content: "Content"

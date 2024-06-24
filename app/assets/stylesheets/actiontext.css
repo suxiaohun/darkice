@@ -29,3 +29,19 @@
   padding: 0 !important;
   max-width: 100% !important;
 }
+trix-toolbar{
+  width: 80%;
+}
+trix-editor {
+  min-height: 20em;
+  width: 80%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(187, 187, 187);
+  border-image: initial;
+  border-radius: 3px;
+  margin: 0px;
+  padding: 0.4em 0.6em;
+  outline: none;
+  align-self: center;
+}

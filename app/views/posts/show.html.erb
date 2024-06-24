@@ -7,10 +7,10 @@
 
   <br>
   <div>
-    <%= link_to "Edit this post", edit_post_path(@post) %> |
-    <%= link_to "Back to posts", posts_path %>
+    <%= link_to t('action.edit'), edit_post_path(@post) %> |
+    <%= link_to t('action.back'), posts_path %>
 
-    <%= button_to "Destroy this post", @post, method: :delete %>
+    <%= button_to t('action.delete'), @post, method: :delete %>
   </div>
 </div>
 

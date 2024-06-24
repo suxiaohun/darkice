@@ -5,15 +5,12 @@
   <%= hidden_field_tag :id, @book.id %>
   <%= hidden_field_tag :process %>
   <%= submit_tag "processForm", id: 'processForm', style: 'display:none' %>
-
 <% end %>
 
 <%= form_tag('/books/page_size', method: :post) do %>
   <%= hidden_field_tag :id, @book.id %>
   <%= hidden_field_tag :page_size %>
-  <%= hidden_field_tag :current_pos, 0 %>
   <%= submit_tag "pagesizeForm", id: 'pagesizeForm', style: 'display:none' %>
-
 <% end %>
 
 <main id="site-main">
@@ -44,13 +41,11 @@
         const process = document.getElementById('range').value;
         document.getElementById('rangeShow').innerHTML = process + '%';
         document.getElementById('process').value = process;
-        document.getElementById('page_size').value = document.getElementById('credit_card').value;
         document.getElementById('processForm').click();
     }
 
     function change_pagesize() {
         document.getElementById('page_size').value = document.getElementById('credit_card').value;
-        document.getElementById('current_pos').value = document.getElementById('curr_pos').value;
         document.getElementById('pagesizeForm').click();
     }
 

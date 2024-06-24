@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_08_022213) do
     t.text "pre_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "total_lines", default: 0
+    t.integer "total_size", default: 0
   end
 
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|

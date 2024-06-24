@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :page_size, :next, :goto, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :page_size, :next, :prev, :goto, :edit, :update, :destroy]
   layout 'books'
 
   def index
@@ -12,23 +12,23 @@ class BooksController < ApplicationController
   end
 
   def category
-      @books = Book.includes(:author).where(category_id: params[:id])
-      @category = Category.find(params[:id])
-      respond_to do |format|
-        format.turbo_stream
-      end
+    @books = Book.includes(:author).where(category_id: params[:id])
+    @category = Category.find(params[:id])
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def auth
     if request.post?
-      @check=false
-      @notice="invalid password"
+      @check = false
+      @notice = "invalid password"
       if params[:auth_code] == BOOK_AUTH_CODE
         cookies.permanent[:auth_code] = BOOK_AUTH_CODE
         id = Category.find_by_name("1024").id
         @books = Book.includes(:author).where(category_id: id)
-        @check=true
-        @notice=""
+        @check = true
+        @notice = ""
       end
       respond_to do |format|
         format.turbo_stream
@@ -41,15 +41,14 @@ class BooksController < ApplicationController
   def show
     @data = {}
     @data[:id] = params[:id]
-    File.open(@book.path) do |io|
-      io.pos = cookies[book_reading_pos_key].to_i
-      @data[:pre_pos] = io.pos
-      @data[:curr_pos] = io.pos
-      @data[:lines] = io.first(get_page_size)
-      @data[:lines][0] = @data[:lines][0].encode("UTF-8", invalid: :replace, replace: "")
-      @data[:next_pos] = io.pos
-    end
-    @data[:rate] = range_rate(@data[:curr_pos])
+    start_pos = cookies[book_reading_pos_key].to_i
+    lines,end_pos = get_lines(start_pos)
+    @data[:neof] = true if end_pos < @book.total_size
+    @data[:lines] = lines
+    @data[:start_pos] = start_pos
+    @data[:end_pos] = end_pos
+
+    @data[:rate] = range_rate(@data[:end_pos])
   end
 
   def page_size
@@ -59,17 +58,19 @@ class BooksController < ApplicationController
       page_size = BOOK_DEFAULT_LINES
     end
     cookies.permanent[:page_size] = page_size
-    current_pos = params[:current_pos].to_i
+    start_pos = cookies[book_reading_pos_key].to_i
 
     @data = {}
     @data[:id] = params[:id]
-    File.open(@book.path) do |io|
-      io.pos = current_pos.to_i
-      @data[:curr_pos] = current_pos
-      @data[:lines] = io.first(get_page_size)
-      @data[:next_pos] = io.pos
-    end
-    @data[:rate] = range_rate(@data[:curr_pos])
+
+    lines,end_pos = get_lines(start_pos)
+    @data[:neof] = true if end_pos < @book.total_size
+    @data[:lines] = lines
+    @data[:start_pos] = start_pos
+    @data[:end_pos] = end_pos
+
+
+    @data[:rate] = range_rate(@data[:end_pos])
     respond_to do |format|
       format.turbo_stream
     end
@@ -83,16 +84,21 @@ class BooksController < ApplicationController
 
     @data = {}
     @data[:id] = params[:id]
-    File.open(@book.path) do |io|
-      curr_lineno = (@book.total_lines * process / 100).round
-      pos = FileHelper.goto(@book, curr_lineno,get_page_size )
-      io.pos = (@book.total_lines * process / 100).round
-      cookies.permanent[book_reading_pos_key] = io.pos
-      @data[:curr_pos] = io.pos
-      @data[:lines] = io.first(get_page_size)
-      @data[:lines][0] = @data[:lines][0].encode("UTF-8", invalid: :replace, replace: "") # 文件指针切分可能会把一个完整字符拆分，减少2个字符即可(一个汉字占三个字节)
-      @data[:next_pos] = io.pos
+
+    if process == 100
+      lines,start_pos = get_reverse_lines(@book.total_size)
+      @data[:start_pos] = start_pos
+      @data[:end_pos] = @book.total_size
+    else
+      start_pos = (@book.total_size * process / 100).round
+      lines,end_pos = get_lines(start_pos)
+      @data[:start_pos] = start_pos
+      @data[:end_pos] = end_pos
+      @data[:neof] = true
     end
+    @data[:lines] = lines
+    cookies.permanent[book_reading_pos_key] = start_pos
+    puts "cache pos: #{start_pos}"
     save_reading_history
     respond_to do |format|
       format.turbo_stream
@@ -102,14 +108,16 @@ class BooksController < ApplicationController
   def next
     @data = {}
     @data[:id] = params[:id]
-    File.open(@book.path) do |io|
-      io.pos = (params[:next_pos].to_i || 0)
-      cookies.permanent[book_reading_pos_key] = io.pos
-      @data[:curr_pos] = io.pos
-      @data[:lines] = io.first(get_page_size)
-      @data[:next_pos] = io.pos
-    end
-    @data[:rate] = range_rate(@data[:curr_pos])
+    start_pos = params[:start_pos].to_i || 0
+    lines,end_pos = get_lines(start_pos)
+
+    cookies.permanent[book_reading_pos_key] = start_pos
+    @data[:start_pos] = start_pos
+    @data[:lines] = lines
+    @data[:end_pos] = end_pos
+    @data[:neof] = true if end_pos < @book.total_size
+
+    @data[:rate] = range_rate(@data[:end_pos])
     save_reading_history
     respond_to do |format|
       format.turbo_stream
@@ -119,14 +127,17 @@ class BooksController < ApplicationController
   def prev
     @data = {}
     @data[:id] = params[:id]
-    File.open(@book.path) do |io|
-      io.pos = (params[:prev_pos].to_i || 0)
-      cookies.permanent[book_reading_pos_key] = io.pos
-      @data[:curr_pos] = io.pos
-      @data[:lines] = io.first(get_page_size)
-      @data[:next_pos] = io.pos
-    end
-    @data[:rate] = range_rate(@data[:curr_pos])
+    end_pos = params[:start_pos].to_i || 0
+
+    lines, start_pos = get_reverse_lines(end_pos)
+
+    cookies.permanent[book_reading_pos_key] = start_pos
+    @data[:neof] = true
+    @data[:start_pos] = start_pos
+    @data[:lines] = lines
+    @data[:end_pos] = end_pos
+
+    @data[:rate] = range_rate(@data[:end_pos])
     save_reading_history
     respond_to do |format|
       format.turbo_stream
@@ -246,7 +257,7 @@ class BooksController < ApplicationController
   end
 
   def range_rate(curr_pos)
-    (curr_pos * 100.0 / book_total_pos.to_i).round(2)
+    (curr_pos * 100.0 / @book.total_size).round(2)
   end
 
   def save_reading_history
@@ -258,9 +269,51 @@ class BooksController < ApplicationController
     cookies.permanent[:reading_history] = _h.to_json
   end
 
+  def get_lines(start_pos)
+    num_lines = get_page_size
+    lines = []
+    end_pos = start_pos
+    File.open(@book.path, "r") do |io|
+      io.pos = start_pos
+      lines = io.first(num_lines + 1)
+      lines.shift
+      end_pos = io.pos
+    end
+    return lines,end_pos
+  end
 
-  def calc_position(page_num)
+  def get_reverse_lines(end_pos)
+    num_lines = get_page_size
+    lines = []
+    start_pos = end_pos
+    File.open(@book.path, 'r') do |io|
+      io.pos = end_pos
+      io.seek(0, IO::SEEK_CUR)
 
+      while lines.size < num_lines && io.pos > 0
+        puts "------old pos:  #{io.pos}"
+        io.seek(-[io.pos, 1024].min, IO::SEEK_CUR)
+
+        maxlen = end_pos - io.pos
+        out_string = "".force_encoding("UTF-8")
+        io.read(maxlen, out_string)
+        new_lines = out_string.lines
+        if new_lines.size > num_lines
+          puts "break lines; #{new_lines.size}"
+          lines = new_lines[-num_lines..-1]
+          pos = lines.sum { |x| x.bytesize }
+          puts "break pos:  #{pos}"
+          io.seek(-pos, IO::SEEK_CUR) # 重置指针
+        else
+          lines = new_lines
+          puts "buff lines:  #{new_lines.size}"
+          io.seek(-maxlen, IO::SEEK_CUR) # 重置指针
+        end
+        puts "------new pos:  #{io.pos}"
+      end
+      start_pos = io.pos
+    end
+    return lines, start_pos
   end
 
 end

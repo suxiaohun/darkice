@@ -55,7 +55,11 @@ namespace :book do
         book.category = Category.find_or_create_by!(name: category)
         book.tag = v[:tag]
         book.path = origin_path + '/' + book.name + '.txt'
-        book.total_lines = FileHelper.total_lines(book.path)
+        File.open(book.path) do |io|
+          io.seek(0, IO::SEEK_END)
+          book.total_size = io.pos
+        end
+
         book.save!
         puts "....create book: #{v[:name]}".green
       end

@@ -42,3 +42,4 @@ lib/utils/pwi/mobs2
 lib/utils/books
 lib/utils/pwi/configs.pck.files
 public/books
+config/database.yml

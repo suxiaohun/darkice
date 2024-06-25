@@ -9,10 +9,10 @@ COPY Gemfile Gemfile.lock /darkice/
 RUN bundle install
 
 ENV RAILS_LOG_TO_STDOUT=true
-ENV MYSQL_URL="mysql.component"
+ENV MYSQL_URL="mysql.default"
 ENV MYSQL_PORT=3306
 ENV REDIS_URL="redis://:123456@redis-default.component:6379/1"
-ENV MYSQL_PASSWORD=123456
+ENV MYSQL_PASSWORD=5107333e08a8
 ENV RAILS_SERVE_STATIC_FILES=true
 
 

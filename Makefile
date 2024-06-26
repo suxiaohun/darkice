@@ -10,7 +10,13 @@ image:
 push: image
 	@docker push $(REPO)/$(PROJECT):$(TAG)
 
-push-ctr: image
+image-prod:
+	@rake assets:clobber
+	@rake assets:precompile
+	@docker build -t $(REPO)/$(PROJECT):$(TAG) .
+
+
+push-ctr: image-prod
 	@docker save -o $PROJECT.tar $(REPO)/$(PROJECT):$(TAG)
 	@ctr -n k8s.io images import $PROJECT.tar
 	@rm $PROJECT.tar

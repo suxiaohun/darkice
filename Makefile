@@ -10,6 +10,10 @@ image:
 push: image
 	@docker push $(REPO)/$(PROJECT):$(TAG)
 
+push-ctr: image
+	@docker save -o $PROJECT.tar $(REPO)/$(PROJECT):$(TAG)
+	@ctr -n k8s.io images import $PROJECT.tar
+	@rm $PROJECT.tar
 
 reset:
 	@rails db:drop

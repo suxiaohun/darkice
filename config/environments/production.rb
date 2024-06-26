@@ -11,6 +11,7 @@ Rails.application.configure do
   config.hosts << "darkice.cn"
   config.hosts << "www.darkice.cn"
   config.hosts << "localhost"
+  config.hosts << "47.93.30.123"
 
 
   # Eager load code on boot. This eager loads most of Rails and

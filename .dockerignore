@@ -13,23 +13,10 @@
 /public/assets/*
 !/public/assets/*.json
 
-/public/packs/*
-!/public/packs/*.json
 public/books
 public/videos
 
-
-app/assets/*
-!/app/assets/config/manifest.js
-!/app/assets/images/.keep
-!/app/assets/videos/.keep
-
-/node_modules
-
-/yarn-error.log
-yarn-debug.log*
-
-.git
+/.git
 .browserslistrc
 .idea
 .generators
@@ -43,6 +30,7 @@ lib/utils/files/phone_info.txt
 /include
 /vendor/*
 
+.ruby-version
 image_build
 image_build_static
 Dockerfile

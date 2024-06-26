@@ -15,6 +15,10 @@ push-ctr: image
 	@ctr -n k8s.io images import $PROJECT.tar
 	@rm $PROJECT.tar
 
+deploy:
+	@cd /root/workspace/chronos/charts && helm install darkice darkice
+
+
 reset:
 	@rails db:drop
 	@rails db:create

@@ -10,9 +10,6 @@
 
 /test/*
 
-/public/assets/*
-!/public/assets/*.json
-
 public/books
 public/videos
 

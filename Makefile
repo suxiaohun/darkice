@@ -20,6 +20,8 @@ push-ctr: image-prod
 	@docker save -o $PROJECT.tar $(REPO)/$(PROJECT):$(TAG)
 	@ctr -n k8s.io images import $PROJECT.tar
 	@rm $PROJECT.tar
+	@docker images | grep none |awk '{print $3}' |xargs  docker rmi
+	@crictl images | grep none |awk '{print $3}' |xargs  crictl rmi
 
 deploy:
 	@cd /root/workspace/chronos/charts && helm install darkice darkice

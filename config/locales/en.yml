@@ -36,6 +36,8 @@ en:
     log_out: "Log out"
     email: "Email"
     password: "Password"
+    password_confirmation: "Password confirmation"
+    minimum_password_length: "%{length} characters minimum"
     remember_me: "Remember me"
     sign_up: "Sign up"
     forgot_password: "Forgot your password?"

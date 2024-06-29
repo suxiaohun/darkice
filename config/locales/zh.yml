@@ -5,6 +5,8 @@
     log_out: "退出"
     email: "邮箱"
     password: "密码"
+    password_confirmation: "确认密码"
+    minimum_password_length: "最短%{length}个字符"
     remember_me: "记住密码"
     sign_up: "注册"
     forgot_password: "忘记密码"

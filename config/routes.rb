@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post 'img_to_base64', to: 'tools#img_to_base64'
 
   get 'chat', to: 'chat_rooms#index'
+  post 'chat/publish', to: 'chat_rooms#publish'
   get 'compress', to: 'tools#compress'
   get 'sense', to: 'tools#sense'
   post 'sense_encode', to: 'tools#sense_encode'

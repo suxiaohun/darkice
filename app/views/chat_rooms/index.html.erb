@@ -43,15 +43,15 @@
     .send_container {
         height: 200px;
         margin: 0 auto;
-        display: none;
     }
 
-    .chat_span {
-        /*display: inline-block;*/
+    .chat-row {
         background: rgb(222, 224, 227);
         border-radius: 5px;
-        padding: 6px 12px;
+        padding: 10px 12px;
+        margin-bottom: 5px;
         width: auto;
+        display: table;
     }
 
     .drop {
@@ -68,9 +68,9 @@
 
     .SendDataArea {
         width: 1016px;
+        height: 200px;
         max-width: 1016px;
         min-width: 1016px;
-        height: 100px;
         border-top: none;
         border-left: none;
         border-right: none;
@@ -83,9 +83,12 @@
   </div>
 
   <div id='SendDataContainer' class="send_container">
+    <%= turbo_stream_from "chaaaat" %>
 
-    <%= text_area_tag :DataToSend, "", :class => "SendDataArea", :placeholder => 'type something...' %>
-
+    <%= form_tag("/chat/publish",id: "messageForm") do %>
+    <%= text_area_tag :message, "", :class => "SendDataArea", :placeholder => 'type something...' %>
+      
+    <% end  %>
   </div>
 
 </div>

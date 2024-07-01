@@ -1,9 +1,10 @@
 
 
-html,
-body {
-  padding: 0 0;
-  width: 1024px;
-  margin: 0 auto;
-  box-sizing: border-box;
+
+.chat-row:nth-child(even){
+  background-color: #f6f4f0;
+}
+
+.chat-row:nth-child(odd){
+  background-color: #d9e4c3;
 }

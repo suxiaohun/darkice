@@ -1,10 +1,8 @@
 <div style="width: 80%">
   <p>
-    <% if user_signed_in? %>
       <%= link_to t('action.new'), new_post_path %>
-    <% end %>
   </p>
-  <% @posts.each_with_index do |post,i| %>
+  <% if @posts.each_with_index do |post,i| %>
     <div class="post-row">
       <div class="post post-comment-count"><%= post.comments.count %></div>
       <div class="post post-title"><%= link_to post.title, post %></div>
@@ -19,11 +17,13 @@
           <span class="post-common"><%= post.comments.last.created_by_name%></span>
           <% else %>
           <span class="post-date"><%= time_tag post.created_at, "data-local": "time-ago" %></span><br>
-          <span class="post-common"><%= post.created_by_name %>11</span>
+          <span class="post-common"><%= post.created_by_name %></span>
           <% end %>
       </div>
     </div>
-  <% end %>
+  <% end.blank? %>
+  <p><%= t('no_records') %></p>
+   <% end %>
   <p>
     <%= paginate @posts %>
   </p>

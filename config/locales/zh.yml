@@ -1,6 +1,7 @@
  zh:
   web_title: "千羽阁"
   login:
+    name: "用户名"
     log_in: "登录"
     log_out: "退出"
     email: "邮箱"
@@ -18,10 +19,14 @@
     back: "返回"
     show: "查看"
     delete: "删除"
+  no_records: "找不到记录"
   helpers:
+    select:
+      prompt: 请选择
     submit:
-      create: "创建%{model}"
-      update: "Confirm changes to %{model}"
+      create: 新增%{model}
+      submit: 储存%{model}
+      update: 更新%{model}
   time:
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
@@ -30,6 +35,94 @@
   post:
     title: "主题"
     content: "内容"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 验证失败：%{errors}
+        restrict_dependent_destroy:
+          has_one: 由于%{record}需要此记录，所以无法移除记录
+          has_many: 由于%{record}需要此记录，所以无法移除记录
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      accepted: 必须是可被接受的
+      blank: 不能为空字符
+      confirmation: 与%{attribute}不匹配
+      empty: 不能留空
+      equal_to: 必须等于%{count}
+      even: 必须为双数
+      exclusion: 是保留关键字
+      greater_than: 必须大于%{count}
+      greater_than_or_equal_to: 必须大于或等于%{count}
+      inclusion: 不包含于列表中
+      invalid: 是无效的
+      less_than: 必须小于%{count}
+      less_than_or_equal_to: 必须小于或等于%{count}
+      model_invalid: 验证失败：%{errors}
+      not_a_number: 不是数字
+      not_an_integer: 必须是整数
+      odd: 必须为单数
+      other_than: 长度非法（不可为%{count}个字符）
+      present: 必须是空白
+      required: 必须存在
+      taken: 已经被使用
+      too_long: 过长（最长为%{count}个字符）
+      too_short: 过短（最短为%{count}个字符）
+      wrong_length: 长度非法（必须为%{count}个字符）
+    template:
+      body: 如下字段出现错误：
+      header: 有%{count}个错误发生导致“%{model}”无法被保存。
 
-
-
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u %n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: CN¥
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: 十亿
+          million: 百万
+          quadrillion: 千兆
+          thousand: 千
+          trillion: 兆
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte: 字节
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: "、"
+      two_words_connector: 和
+      words_connector: "、"

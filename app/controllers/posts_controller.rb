@@ -1,13 +1,11 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: %i[ index new edit update destroy ]
+  before_action :authenticate_user!, only: %i[ new edit update destroy ]
   before_action :set_post, only: %i[ show edit update destroy ]
   layout 'post'
 
   # GET /posts or /posts.json
   def index
-    # binding.pry
-    # current_user
-    @posts = Post.all.page params[:page]
+    @posts = Post.order(id: "desc").page params[:page]
   end
 
   # GET /posts/1 or /posts/1.json
@@ -30,11 +28,12 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
+    @post.set_created_by current_user
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
+        format.html { redirect_to posts_url, notice: "Post was successfully created." }
+        format.json { render :index, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }

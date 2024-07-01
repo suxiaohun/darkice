@@ -32,6 +32,7 @@
 en:
   web_title: "Darkice"
   login:
+    name: "Username"
     log_in: "Log in"
     log_out: "Log out"
     email: "Email"
@@ -49,6 +50,7 @@ en:
     back: "Back"
     show: "Show"
     delete: "Delete"
+  no_records: "No records"
   helpers:
     submit:
       create: "Create a %{model}"

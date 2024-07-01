@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) do |user|
+      user.permit(:name, :email, :password, :password_confirmation)
+    end
+  end
 
   def call_grpc(method:, img: nil, img1: nil, img2: nil, feat1: nil, feat2: nil)
     # host = "127.0.0.1:50050"

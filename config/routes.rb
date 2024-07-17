@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'xiuxian/index'
   get 'questions/order',to: "questions#run_in_order"
   get 'questions/random',to: "questions#run_in_random"
   get 'questions/refresh_ids',to: "questions#refresh_ids"

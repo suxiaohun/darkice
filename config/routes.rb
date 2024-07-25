@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  get 'feishu', to: 'common#feishu'
   get 'index', to: 'common#index'
   get 'index2', to: 'common#index2'
   get 'encode_upload', to: 'common#encode_upload'

@@ -1,3 +1,4 @@
+require 'net/http'
 class CommonController < ApplicationController
 
   include XiuxianInfo
@@ -8,6 +9,44 @@ class CommonController < ApplicationController
 
   end
 
+
+  def feishu
+    msg = {
+      "msg_type": "post",
+      "content": {
+        "post": {
+          "zh_cn": {
+            "title": "告警通知",
+             "content": [
+            ]
+          }
+        }
+      }
+    }
+
+    params["alerts"].each do |obj|
+      para = []
+      para << {"tag": "text", "text": "告警类型："+obj["labels"]["alertname"]+"\n"}
+      para << {"tag": "text", "text": "告警对象："+obj["labels"]["node"]+"\n"}
+      para << {"tag": "text", "text": "当前值："+obj["values"]["B"].to_s+"\n"}
+
+      msg[:content][:post][:zh_cn][:content] << para
+    end
+
+
+    webhook_url = "https://open.feishu.cn/open-apis/bot/v2/hook/3eabd7fa-aa91-46f1-90e6-607d1a4c44b4"
+    uri = URI.parse(webhook_url)
+    header = {"Content-Type" => "application/json"}
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri.path, header)
+    request.body = msg.to_json
+
+    response = http.request(request)
+    puts response
+    render text: "ok"
+  end
 
   def chatgpt
     if request.post?

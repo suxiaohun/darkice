@@ -112,6 +112,7 @@ class ToolsController < ApplicationController
       when 'md5'
         secret = "7ffc306ae386127b"
         @sign_str = secret + @sign_str + secret
+        puts @sign_str
         @sign = Digest::MD5.hexdigest(@sign_str)
       when 'sha1'
         @sign = Digest::SHA1.hexdigest(@sign_str)

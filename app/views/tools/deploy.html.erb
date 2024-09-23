@@ -1,0 +1,80 @@
+<!-- app/views/services/index.html.erb -->
+<h1>Services</h1>
+
+<table>
+  <tr>
+    <th>Service</th>
+    <th>Action</th>
+  </tr>
+
+  <% @services.each do |service| %>
+    <tr>
+      <td><%= service[:name] %></td>
+      <td>
+        <!-- 点击按钮触发弹出框并输入 tag -->
+        <button onclick="openUpdateModal('<%= service[:name] %>')">Update</button>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<!-- 弹出框，用于输入镜像 tag -->
+<div id="updateModal" style="display:none;">
+  <h2>Update Service</h2>
+  <form id="updateForm">
+    <input type="hidden" id="serviceName" name="service_name" />
+    <label for="tag">Enter new tag:</label>
+    <input type="text" id="tag" name="tag" required />
+    <button type="submit">Submit</button>
+  </form>
+  <button onclick="closeUpdateModal()">Close</button>
+</div>
+
+<!-- Shell 执行结果显示区域 -->
+<div id="outputModal" style="display:none;">
+  <h2>Shell Output</h2>
+  <pre id="shellOutput"></pre>
+  <button onclick="closeOutputModal()">Close</button>
+</div>
+
+<script>
+    // 打开更新弹出框
+    function openUpdateModal(serviceName) {
+        document.getElementById('serviceName').value = serviceName;
+        document.getElementById('updateModal').style.display = 'block';
+    }
+
+    // 关闭更新弹出框
+    function closeUpdateModal() {
+        document.getElementById('updateModal').style.display = 'none';
+    }
+
+    // 关闭输出弹出框
+    function closeOutputModal() {
+        document.getElementById('outputModal').style.display = 'none';
+    }
+
+    // 处理表单提交并发送 AJAX 请求
+    document.getElementById('updateForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        fetch('/services/update', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 显示 shell 输出结果
+                document.getElementById('shellOutput').textContent = data.message;
+                document.getElementById('updateModal').style.display = 'none';
+                document.getElementById('outputModal').style.display = 'block';
+            })
+            .catch(error => {
+                document.getElementById('shellOutput').textContent = "Error: " + error.message;
+                document.getElementById('updateModal').style.display = 'none';
+                document.getElementById('outputModal').style.display = 'block';
+            });
+    });
+</script>

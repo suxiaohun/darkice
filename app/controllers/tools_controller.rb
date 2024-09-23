@@ -1,4 +1,8 @@
 class ToolsController < ApplicationController
+  def deploy
+    
+  end
+
   def markdown; end
 
   def hammerspoon; end

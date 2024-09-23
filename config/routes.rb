@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
 
 
+  get 'deploy', to: 'tools#deploy'
   get 'img_to_base64', to: 'tools#img_to_base64'
   post 'img_to_base64', to: 'tools#img_to_base64'
 

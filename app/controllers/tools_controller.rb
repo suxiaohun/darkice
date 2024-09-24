@@ -1,6 +1,28 @@
 class ToolsController < ApplicationController
   def deploy
-    
+    @services = [
+      { name: "Service1", version: "v1.0" },
+      { name: "Service2", version: "v1.1" },
+    # 你可以通过从 Kubernetes 获取动态服务列表
+    ]
+  end
+
+  def service_update
+    service_name = params[:service_name]
+    new_tag = params[:tag]
+
+    # 构造要执行的 shell 命令
+    command = "helmfile -l name=#{service_name} sync --set image.tag=#{new_tag}"
+
+    # 使用 Open3 执行 shell 命令并捕获输出
+    require 'open3'
+    stdout, stderr, status = Open3.capture3(command)
+
+    if status.success?
+      render json: { message: "Success: #{stdout}" }
+    else
+      render json: { message: "Error: #{stderr}" }, status: 500
+    end
   end
 
   def markdown; end

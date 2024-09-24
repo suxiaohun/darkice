@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
 
   get 'deploy', to: 'tools#deploy'
+  post 'tools/service_update', to: 'tools#service_update'
   get 'img_to_base64', to: 'tools#img_to_base64'
   post 'img_to_base64', to: 'tools#img_to_base64'
 

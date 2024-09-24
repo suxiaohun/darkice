@@ -33,7 +33,7 @@
 <!-- Shell 执行结果显示区域 -->
 <div id="outputModal" style="display:none;">
   <h2>Shell Output</h2>
-  <pre id="shellOutput"></pre>
+  <pre id="shellOutput" style="background: black;color: white;min-height: 300px;min-width: 300px;padding: 20px 20px"></pre>
   <button onclick="closeOutputModal()">Close</button>
 </div>
 
@@ -60,7 +60,7 @@
 
         var formData = new FormData(this);
 
-        fetch('/services/update', {
+        fetch('/tools/service_update', {
             method: 'POST',
             body: formData
         })

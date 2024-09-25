@@ -1,4 +1,5 @@
 class ToolsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:service_update]
   def deploy
     @services = [
       { name: "Service1", version: "v1.0" },

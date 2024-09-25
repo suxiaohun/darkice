@@ -137,7 +137,7 @@ class ToolsController < ApplicationController
 
       case params[:hex_type]
       when 'md5'
-        secret = "4c25c91812204fb8"
+        secret = "7ffc306ae386127b"
         @sign_str = secret + @sign_str + secret
         puts @sign_str
         @sign = Digest::MD5.hexdigest(@sign_str)

@@ -1,24 +1,48 @@
 <!-- app/views/services/index.html.erb -->
-<h1>Services</h1>
+<h1>Services by Tag</h1>
 
-<table>
-  <tr>
-    <th>Service</th>
-    <th>Action</th>
-  </tr>
-
-  <% @services.each do |service| %>
-    <tr>
-      <td><%= service[:name] %></td>
-      <td>
-        <!-- 点击按钮触发弹出框并输入 tag -->
-        <button onclick="openUpdateModal('<%= service[:name] %>')">Update</button>
-      </td>
-    </tr>
+<!-- 导航栏：Tab 页签 -->
+<ul class="nav nav-tabs" id="serviceTabs" role="tablist">
+  <% @services_by_tag.each_with_index do |(tag, _), index| %>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link <%= 'active' if index == 0 %>" id="tab-<%= tag %>" data-bs-toggle="tab" href="#pane-<%= tag %>" role="tab" aria-controls="pane-<%= tag %>" aria-selected="<%= index == 0 ? 'true' : 'false' %>">
+        <%= tag %>
+      </a>
+    </li>
   <% end %>
-</table>
+</ul>
 
-<!-- 弹出框，用于输入镜像 tag -->
+<!-- 内容面板：Tab 对应的内容 -->
+<div class="tab-content" id="serviceTabContent">
+  <% @services_by_tag.each_with_index do |(tag, services), index| %>
+    <div class="tab-pane fade <%= 'show active' if index == 0 %>" id="pane-<%= tag %>" role="tabpanel" aria-labelledby="tab-<%= tag %>">
+      <h2><%= tag %></h2>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Service</th>
+          <th>version</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% services.each do |service| %>
+          <tr>
+            <td><%= service[:name] %></td>
+            <td><%= service[:version] %></td>
+            <td>
+              <!-- 点击按钮触发弹出框并输入 tag -->
+              <button class="btn btn-primary" onclick="openUpdateModal('<%= service[:name] %>')">Update</button>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<!-- 更新服务的弹出框 -->
 <div id="updateModal" style="display:none;">
   <h2>Update Service</h2>
   <form id="updateForm">
@@ -30,10 +54,10 @@
   <button onclick="closeUpdateModal()">Close</button>
 </div>
 
-<!-- Shell 执行结果显示区域 -->
+<!-- Shell 执行结果的弹出框 -->
 <div id="outputModal" style="display:none;">
   <h2>Shell Output</h2>
-  <pre id="shellOutput" style="background: black;color: white;min-height: 300px;min-width: 300px;padding: 20px 20px"></pre>
+  <pre id="shellOutput" style="padding: 20px;background: black;color: white"></pre>
   <button onclick="closeOutputModal()">Close</button>
 </div>
 
@@ -66,7 +90,6 @@
         })
             .then(response => response.json())
             .then(data => {
-                // 显示 shell 输出结果
                 document.getElementById('shellOutput').textContent = data.message;
                 document.getElementById('updateModal').style.display = 'none';
                 document.getElementById('outputModal').style.display = 'block';
@@ -78,3 +101,18 @@
             });
     });
 </script>
+
+<style>
+    /* 简单的弹出框样式 */
+    #updateModal, #outputModal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: white;
+        border: 1px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+</style>

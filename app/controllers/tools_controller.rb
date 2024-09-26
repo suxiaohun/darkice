@@ -2,10 +2,18 @@ class ToolsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:service_update]
   def deploy
     @services = [
-      { name: "Service1", version: "v1.0" },
-      { name: "Service2", version: "v1.1" },
-    # 你可以通过从 Kubernetes 获取动态服务列表
+      { name: "mes-rest", version: "v1.0", tag: "mes" },
+      { name: "mes-check", version: "v1.0", tag: "mes" },
+      { name: "mes-user", version: "v1.0", tag: "mes" },
+      { name: "mes-web", version: "v1.0", tag: "mes" },
+      { name: "oes-rest", version: "v1.0", tag: "oes" },
+      { name: "oes-web", version: "v1.1", tag: "oes" },
+      { name: "plm-rest", version: "v1.2", tag: "plm" },
+      { name: "plm-web", version: "v1.2", tag: "plm" }
     ]
+
+    # 根据 tag 进行分组
+    @services_by_tag = @services.group_by { |service| service[:tag] }
   end
 
   def service_update
@@ -137,7 +145,7 @@ class ToolsController < ApplicationController
 
       case params[:hex_type]
       when 'md5'
-        secret = "7ffc306ae386127b"
+        secret = ""
         @sign_str = secret + @sign_str + secret
         puts @sign_str
         @sign = Digest::MD5.hexdigest(@sign_str)

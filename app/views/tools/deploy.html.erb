@@ -22,6 +22,7 @@
         <tr>
           <th>Service</th>
           <th>version</th>
+          <th>last_updated</th>
           <th>Action</th>
         </tr>
         </thead>
@@ -30,9 +31,10 @@
           <tr>
             <td><%= service[:name] %></td>
             <td><%= service[:version] %></td>
+            <td><%= service[:last_updated] %></td>
             <td>
               <!-- 点击按钮触发弹出框并输入 tag -->
-              <button class="btn btn-primary" onclick="openUpdateModal('<%= service[:name] %>')">Update</button>
+              <button class="btn btn-primary" onclick="openUpdateModal('<%= service[:name] %>','<%= service[:version] %>')">Update</button>
             </td>
           </tr>
         <% end %>
@@ -47,8 +49,8 @@
   <h2>Update Service</h2>
   <form id="updateForm">
     <input type="hidden" id="serviceName" name="service_name" />
-    <label for="tag">Enter new tag:</label>
-    <input type="text" id="tag" name="tag" required />
+    <label for="tag">Enter new image tag:</label>
+    <input type="text" id="serviceVersion" name="service_version" required />
     <button type="submit">Submit</button>
   </form>
   <button onclick="closeUpdateModal()">Close</button>
@@ -63,8 +65,9 @@
 
 <script>
     // 打开更新弹出框
-    function openUpdateModal(serviceName) {
+    function openUpdateModal(serviceName,serviceVersion) {
         document.getElementById('serviceName').value = serviceName;
+        document.getElementById('serviceVersion').value = serviceVersion;
         document.getElementById('updateModal').style.display = 'block';
     }
 

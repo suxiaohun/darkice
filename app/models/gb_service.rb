@@ -1,0 +1,2 @@
+class GbService < ApplicationRecord
+end

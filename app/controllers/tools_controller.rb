@@ -1,19 +1,9 @@
 class ToolsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:service_update]
   def deploy
-    @services = [
-      { name: "mes-rest", version: "v1.0", tag: "mes" },
-      { name: "mes-check", version: "v1.0", tag: "mes" },
-      { name: "mes-user", version: "v1.0", tag: "mes" },
-      { name: "mes-web", version: "v1.0", tag: "mes" },
-      { name: "oes-rest", version: "v1.0", tag: "oes" },
-      { name: "oes-web", version: "v1.1", tag: "oes" },
-      { name: "plm-rest", version: "v1.2", tag: "plm" },
-      { name: "plm-web", version: "v1.2", tag: "plm" }
-    ]
-
+    @services =  GbService.all
     # 根据 tag 进行分组
-    @services_by_tag = @services.group_by { |service| service[:tag] }
+    @services_by_tag = @services.group_by { |service| service.tag }
   end
 
   def service_update
@@ -28,6 +18,8 @@ class ToolsController < ApplicationController
     stdout, stderr, status = Open3.capture3(command)
 
     if status.success?
+
+
       render json: { message: "Success: #{stdout}" }
     else
       render json: { message: "Error: #{stderr}" }, status: 500

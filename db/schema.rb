@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_08_022213) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_26_030047) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -103,6 +103,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_08_022213) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["file_id", "lineno"], name: "index_file_indices_on_file_id_and_lineno"
+  end
+
+  create_table "gb_services", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "version"
+    t.string "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "phone_infos", charset: "utf8mb4", force: :cascade do |t|

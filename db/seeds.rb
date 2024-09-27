@@ -24,3 +24,17 @@ Post.create([
             ])
 
 
+GbService.create([
+                   {name: "mes-rest", version: 'v1.0-1bec5a63', tag: 'mes' },
+                   {name: "mes-check", version: 'v1.0-1bec5a63', tag: 'mes' },
+                   {name: "mes-user", version: 'v1.0-1bec5a63', tag: 'mes' },
+                   {name: "mes-web", version: 'v1.0-1bec5a63', tag: 'mes' },
+                   {name: "oes-rest", version: 'v1.0-1bec5a63', tag: 'oes' },
+                   {name: "oes-user", version: 'v1.0-1bec5a63', tag: 'oes' },
+                   {name: "oes-web", version: 'v1.0-1bec5a63', tag: 'oes' },
+                   {name: "plm-rest", version: 'v1.0-1bec5a63', tag: 'plm' },
+                   {name: "plm-web", version: 'v1.0-1bec5a63', tag: 'plm' },
+                 ])
+
+
+

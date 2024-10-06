@@ -18,10 +18,11 @@ class ToolsController < ApplicationController
     stdout, stderr, status = Open3.capture3(command)
 
     if status.success?
-
-
+      # save tag
+      GbService.where(name: service_name).first.update!(tag: new_tag)
       render json: { message: "Success: #{stdout}" }
     else
+      puts stderr
       render json: { message: "Error: #{stderr}" }, status: 500
     end
   end

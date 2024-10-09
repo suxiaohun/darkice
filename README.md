@@ -1,40 +1,14 @@
-# README
+# Introduction
+This project is used to learn ruby and rails, and contains many practical tools.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It can be deployed on bare metal or in containers.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
----
-This project is based on JetBrains open source software: RubyMine, it make coding more creative and effective. Please
-purchase commercial products to support them if you can.
----
-
+# Features
 * Test ruby features
-
 * Test gems
-
 * Test rails features
-
 * Test Docker
-
 * Test k8s
-
 * Useful tools
     - color selector
     - websocket example  
@@ -48,4 +22,14 @@ purchase commercial products to support them if you can.
     - ffmpeg commands
     - ...
 
-* ...
+# Debug
+```shell
+git clone -b master git@github.com:suxiaohun/darkice.git
+cd darkice
+rails s -b 0.0.0.0
+```
+
+# Deploy
+1. `make build` will build the docker image.
+2. If you want to deploy in a k8s cluster, refer to: https://github.com/suxiaohun/chronos
+
